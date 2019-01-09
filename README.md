@@ -1,7 +1,7 @@
 # ARK Server Configuration Tool
 A tool made for configuring and reading data from ARK servers.
 
-**This project is heavily work in progress, and is far from finished. It has yet to been cleaned up, so expect messy code!**
+## **This project is heavily work in progress, and is far from finished. It has yet to been cleaned up, so expect messy code!**
 
 This program can be used to read and write information for your server, as well as control them!
 
