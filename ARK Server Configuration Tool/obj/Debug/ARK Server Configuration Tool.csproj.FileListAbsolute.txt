@@ -1,0 +1,25 @@
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\ARK Server Configuration Tool.exe.config
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\ARK Server Configuration Tool.exe
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\ARK Server Configuration Tool.pdb
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\obj\Debug\ARK_Server_Configuration_Tool.Properties.Resources.resources
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\obj\Debug\ARK Server Configuration Tool.csproj.GenerateResource.cache
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\obj\Debug\ARK Server Configuration Tool.csproj.CoreCompileInputs.cache
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\obj\Debug\ARK Server Configuration Tool.exe
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\obj\Debug\ARK Server Configuration Tool.pdb
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\obj\Debug\ARK_Server_Configuration_Tool.MainForm.resources
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\INIFileParser.dll
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\Microsoft.WindowsAPICodePack.dll
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\INIFileParser.xml
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\Microsoft.WindowsAPICodePack.xml
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\obj\Debug\ARK Server Configuration Tool.csprojAssemblyReference.cache
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\obj\Debug\ARK_Server_Configuration_Tool.NewServerProfileForm.resources
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\obj\Debug\ARK Server Configuration Tool.csproj.CopyComplete
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\Newtonsoft.Json.dll
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\Newtonsoft.Json.xml
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\ArkSavegameToolkitNet.dll
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\ArkSavegameToolkitNet.Domain.dll
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\log4net.dll
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\log4net.xml
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\ServerSettingsList.json

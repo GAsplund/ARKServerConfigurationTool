@@ -1,0 +1,44 @@
+{
+  "BackEndSettingsTabPage": [
+    {
+      "name": "Session Name",
+      "location": "",
+      "type": "text",
+      "default": ""
+    },
+    {
+      "name": "Max Players",
+      "type": "slider",
+      "range": [ 1, 100 ],
+      "default": 10
+    },
+    {
+      "name": "Query Port",
+      "type": "text",
+      "default": "27015"
+    },
+    {
+      "name": "Server Port",
+      "type": "text",
+      "default": "7777"
+    },
+    {
+      "name": "RCON Port",
+      "type": "text",
+      "default": "27020"
+    },
+    {
+      "name": "Enable RCON",
+      "type": "bool",
+      "default": true
+    }
+  ],
+  "RatesSettingsTabPage": [
+    {
+      "name": "Gathering",
+      "type": "string",
+      "range": [ 1, 20 ],
+      "default": ""
+    }
+  ]
+}
