@@ -23,3 +23,28 @@ H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration T
 H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\log4net.dll
 H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\log4net.xml
 H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\ServerSettingsList.json
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\ServerSettingsList.json
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\ARK Server Configuration Tool.exe.config
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\ARK Server Configuration Tool.exe
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\ARK Server Configuration Tool.pdb
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\ArkSavegameToolkitNet.dll
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\ArkSavegameToolkitNet.Domain.dll
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\INIFileParser.dll
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\log4net.dll
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\Microsoft.WindowsAPICodePack.dll
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\Microsoft.WindowsAPICodePack.Shell.dll
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\INIFileParser.xml
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\log4net.xml
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\Microsoft.WindowsAPICodePack.xml
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\Microsoft.WindowsAPICodePack.Shell.xml
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\obj\Debug\ARK Server Configuration Tool.csprojAssemblyReference.cache
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\obj\Debug\ARK_Server_Configuration_Tool.MainForm.resources
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\obj\Debug\ARK_Server_Configuration_Tool.NewServerProfileForm.resources
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\obj\Debug\ARK_Server_Configuration_Tool.Properties.Resources.resources
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\obj\Debug\ARK Server Configuration Tool.csproj.GenerateResource.cache
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\obj\Debug\ARK Server Configuration Tool.csproj.CoreCompileInputs.cache
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\obj\Debug\ARK Server Configuration Tool.csproj.CopyComplete
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\obj\Debug\ARK Server Configuration Tool.exe
+C:\Users\Gustaf Asplund\Downloads\ARKServerConfigurationTool-master\ARKServerConfigurationTool-master\ARK Server Configuration Tool\obj\Debug\ARK Server Configuration Tool.pdb

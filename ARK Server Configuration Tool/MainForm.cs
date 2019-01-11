@@ -46,8 +46,24 @@ namespace ARK_Server_Configuration_Tool
 
         private void UpdateServerStatusButton_Click(object sender, EventArgs e)
         {
-            ServerStatus Status = new ServerStatus(new IPEndPoint(IPAddress.Parse("127.0.0.1"), Convert.ToInt32(GlobalVariables.CurrentServerConfig["queryPort"])));
-            ServerStatusLabel.Text = ("Server: " + Status.CheckServerStatus().ToString().Replace("_"," "));
+            ServerStatusLabel.Text = "Server: Getting status...";
+            Task.Factory.StartNew(async () =>
+            {
+                ServerStatus Status = new ServerStatus(new IPEndPoint(IPAddress.Parse("127.0.0.1"), Convert.ToInt32(GlobalVariables.CurrentServerConfig["queryPort"])));
+                if (ServerStatusLabel.InvokeRequired)
+                {
+                    ServerStatusLabel.Invoke(new MethodInvoker(delegate
+                    {
+                        ServerStatusLabel.Text = ("Server: " + Status.CheckServerStatus().ToString().Replace("_", " "));
+                    }));
+                }
+                else
+                {
+                    ServerStatusLabel.Text = ("Server: " + Status.CheckServerStatus().ToString().Replace("_", " "));
+                }
+                
+            });
+            
 
         }
 
