@@ -10,3 +10,8 @@ In the finished product, you will be able to do the following:
 - Configure your servers
 - Shrink server size
 - Update servers
+
+As of now, you can:
+- Create server profiles
+- Get server run status
+- Get dinos from the server map
