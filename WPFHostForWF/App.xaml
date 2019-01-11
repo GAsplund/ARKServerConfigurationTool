@@ -1,0 +1,9 @@
+﻿<Application x:Class="WPFHostForWF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WPFHostForWF"
+             StartupUri="AnnotatedSlider.xaml">
+    <Application.Resources>
+         
+    </Application.Resources>
+</Application>

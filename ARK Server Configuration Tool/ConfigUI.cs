@@ -4,8 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.Integration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Windows.Shell;
+using Appl = System.Windows.Application;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace ARK_Server_Configuration_Tool
 {
@@ -34,16 +39,18 @@ namespace ARK_Server_Configuration_Tool
                     InputElement = InputElementCheckBox;
                     break;
                 case "slider": // Integer input
-                    TrackBar InputElementTrackBar = new TrackBar
-                    {
-                        // Fix protection level
-                        //InputElementTrackBar.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
-                        //BackColor = System.Drawing.Color.Transparent,
-                        TickStyle = TickStyle.Both,
-                        TickFrequency = 0,
-                        Name = SettingParams["name"].ToString().Replace(" ", "") + "TrackBar"
-                    };
+                    ElementHost InputElementTrackBar = new ElementHost();
+                    ARK_Server_Manager.AnnotatedSlider Sliderrrr = new ARK_Server_Manager.AnnotatedSlider();
+                    Sliderrrr.Maximum = Convert.ToSingle(SettingParams["range"][1]);
+                    Sliderrrr.Minimum = Convert.ToSingle(SettingParams["range"][0]);
+                    Sliderrrr.Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Color.FromRgb(0xFF, 0xFF, 0xFF));
+                    InputElementTrackBar.Child = Sliderrrr;
+                    InputElementTrackBar.Name = SettingParams["name"].ToString().Replace(" ", "") + "TrackBar";
+                    InputElementTrackBar.Height = 25;
+                    //InputElementTrackBar.Child.
                     InputElement = InputElementTrackBar;
+                    InputElement = InputElementTrackBar;
+
                     break;
                 default: // Text input or unidentified input
                     TextBox InputElementTextBox = new TextBox();
@@ -64,6 +71,9 @@ namespace ARK_Server_Configuration_Tool
                 case "System.Windows.Forms.TextBox":
                     InputElement.TextChanged += (s, e) => {  };
                     break;
+                case "System.Windows":
+                    //InputElement;
+                    break;
             }
 
             Label SettingNameLabel = new Label
@@ -76,7 +86,8 @@ namespace ARK_Server_Configuration_Tool
             Position.X += SettingNameLabel.Width;
 
             InputElement.Font = new System.Drawing.Font(InputElement.Font.Name, 10.25F, InputElement.Font.Style, InputElement.Font.Unit);
-            InputElement.Location = Position;
+
+            InputElement.Location = new System.Drawing.Point(Position.X, SettingNameLabel.Location.Y - (InputElement.Height - SettingNameLabel.Height)/2 - 2 );
             InputElement.Width = TabTarget.Width - InputElement.Width-100;
 
             // Add the controls for the setting here
@@ -90,9 +101,14 @@ namespace ARK_Server_Configuration_Tool
 
 
             // Call the function to finally add the controls safely
+            //Appl.Current.Dispatcher.BeginInvoke((Action)AddToLayout);
+            //Dispatcher.Invoke(new MethodInvoker(AddToLayout));
+            //Dispatcher.BeginInvoke(new Action(() => { AddToLayout(); }));
+
+
             if (TabTarget.InvokeRequired)
             {
-                TabTarget.Invoke(new MethodInvoker(delegate
+                MainForm_Control.Invoke(new MethodInvoker(delegate
                 {
                     AddToLayout();
                 }));
@@ -130,10 +146,15 @@ namespace ARK_Server_Configuration_Tool
                         try
                         {
                             AddConfigOption(MainForm_Control, SettingsTabs[SettingsTabs.IndexOfKey(Parent.Name.ToString())], Setting, Position);
+                            /*Thread t = new Thread(() => AddConfigOption(MainForm_Control, SettingsTabs[SettingsTabs.IndexOfKey(Parent.Name.ToString())], Setting, Position));
+                            t.SetApartmentState(ApartmentState.STA);
+                            t.IsBackground = true;
+                            t.Start();*/
+
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Error while adding config \"" + Setting["name"].ToString() + "\":\n" + ex.Message);
+                            System.Windows.Forms.MessageBox.Show("Error while adding config \"" + Setting["name"].ToString() + "\":\n" + ex.Message);
                         }
                         Position.Y += PaddingTop + Spacing;
                     }

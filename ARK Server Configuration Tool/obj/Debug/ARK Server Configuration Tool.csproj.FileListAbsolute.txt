@@ -23,3 +23,6 @@ H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration T
 H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\log4net.dll
 H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\log4net.xml
 H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\ServerSettingsList.json
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\WPFHostForWF.exe
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\WPFHostForWF.pdb
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\WPFHostForWF.exe.config

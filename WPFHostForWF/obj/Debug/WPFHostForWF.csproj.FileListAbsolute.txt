@@ -1,0 +1,13 @@
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\bin\Debug\WPFHostForWF.exe.config
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\bin\Debug\WPFHostForWF.exe
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\bin\Debug\WPFHostForWF.pdb
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\AnnotatedSlider.baml
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\AnnotatedSlider.g.cs
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\App.g.cs
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\WPFHostForWF_MarkupCompile.cache
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\WPFHostForWF.g.resources
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\WPFHostForWF.Properties.Resources.resources
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\WPFHostForWF.csproj.GenerateResource.cache
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\WPFHostForWF.csproj.CoreCompileInputs.cache
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\WPFHostForWF.exe
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\WPFHostForWF.pdb

@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -20,6 +21,13 @@ namespace ARK_Server_Configuration_Tool
 
         public MainForm()
         {
+            this.SetStyle(ControlStyles.SupportsTransparentBackColor, true);
+
+            if (null == System.Windows.Application.Current)
+            {
+                new System.Windows.Application();
+            }
+
             InitializeComponent();
         }
 
@@ -41,13 +49,51 @@ namespace ARK_Server_Configuration_Tool
         {
             Prof.GetProfiles();
             Prof.GetClusters();
-            Task.Factory.StartNew(async() => { await Conf.AddConfigForCategories(); });
+
+            Conf.AddConfigForCategories();
+
+            //Task.Factory.StartNew(async() => { await Conf.AddConfigForCategories(); });
+        }
+
+        public static Task StartSTATask(Action func)
+        {
+            var tcs = new TaskCompletionSource<object>();
+            var thread = new Thread(() =>
+            {
+                try
+                {
+                    func();
+                    tcs.SetResult(null);
+                }
+                catch (Exception e)
+                {
+                    tcs.SetException(e);
+                }
+            });
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            return tcs.Task;
         }
 
         private void UpdateServerStatusButton_Click(object sender, EventArgs e)
         {
-            ServerStatus Status = new ServerStatus(new IPEndPoint(IPAddress.Parse("127.0.0.1"), Convert.ToInt32(GlobalVariables.CurrentServerConfig["queryPort"])));
-            ServerStatusLabel.Text = ("Server: " + Status.CheckServerStatus().ToString().Replace("_"," "));
+            ServerStatusLabel.Text = "Server: Getting status...";
+            Task.Factory.StartNew(async () =>
+            {
+                ServerStatus Status = new ServerStatus(new IPEndPoint(IPAddress.Parse("127.0.0.1"), Convert.ToInt32(GlobalVariables.CurrentServerConfig["queryPort"])));
+                if (ServerStatusLabel.InvokeRequired)
+                {
+                    ServerStatusLabel.Invoke(new MethodInvoker(delegate
+                    {
+                        ServerStatusLabel.Text = ("Server: " + Status.CheckServerStatus().ToString().Replace("_", " "));
+                    }));
+                }
+                else
+                {
+                    ServerStatusLabel.Text = ("Server: " + Status.CheckServerStatus().ToString().Replace("_", " "));
+                }
+
+            });
 
         }
 
