@@ -36,9 +36,8 @@
   "RatesSettingsTabPage": [
     {
       "name": "Gathering",
-      "type": "string",
-      "range": [ 1, 20 ],
-      "default": ""
+      "type": "slider",
+      "range": [ 1, 20 ]
     }
   ]
 }
