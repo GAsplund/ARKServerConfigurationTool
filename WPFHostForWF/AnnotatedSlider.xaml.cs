@@ -42,7 +42,7 @@ namespace ARK_Server_Manager
         public float Value
         {
             get { return (float)GetValue(ValueProperty); }
-            set { SetValue(ValueProperty, value); }
+            set { SetValue(ValueProperty, value); ValueChanged(ValueProperty, value); }
         }
 
         public string Suffix
@@ -111,7 +111,10 @@ namespace ARK_Server_Manager
             (this.Content as FrameworkElement).DataContext = this;
         }
 
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        public delegate void ValueChangedHandler(object sender, float SliderValue);
+        public event ValueChangedHandler ValueChanged = delegate {};
+
+        public void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             if(Slider.IsFocused)
             {

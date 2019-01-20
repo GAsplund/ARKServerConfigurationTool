@@ -57,6 +57,7 @@
             this.ClusterSelectorLabel = new System.Windows.Forms.Label();
             this.ClusterStatusLabel = new System.Windows.Forms.Label();
             this.ServerStatusLabel = new System.Windows.Forms.Label();
+            this.ModsConfigTabPage = new System.Windows.Forms.TabPage();
             this.ServerSettingsTabControl.SuspendLayout();
             this.MapInfoTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MapInfoDinoListDataGridView)).BeginInit();
@@ -134,6 +135,7 @@
             this.ServerSettingsTabControl.Controls.Add(this.PlayersConfigTabPage);
             this.ServerSettingsTabControl.Controls.Add(this.DinosConfigTabPage);
             this.ServerSettingsTabControl.Controls.Add(this.EnvironmentalConfigTabPage);
+            this.ServerSettingsTabControl.Controls.Add(this.ModsConfigTabPage);
             this.ServerSettingsTabControl.Enabled = false;
             this.ServerSettingsTabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.ServerSettingsTabControl.Location = new System.Drawing.Point(12, 160);
@@ -352,6 +354,15 @@
             this.ServerStatusLabel.TabIndex = 16;
             this.ServerStatusLabel.Text = "Server: N/A";
             // 
+            // ModsConfigTabPage
+            // 
+            this.ModsConfigTabPage.Location = new System.Drawing.Point(4, 22);
+            this.ModsConfigTabPage.Name = "ModsConfigTabPage";
+            this.ModsConfigTabPage.Size = new System.Drawing.Size(1036, 330);
+            this.ModsConfigTabPage.TabIndex = 8;
+            this.ModsConfigTabPage.Text = "Mods";
+            this.ModsConfigTabPage.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -413,6 +424,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DinoLatitudeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LongitudeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TameableColumn;
+        private System.Windows.Forms.TabPage ModsConfigTabPage;
     }
 }
 

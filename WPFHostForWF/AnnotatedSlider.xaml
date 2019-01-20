@@ -289,7 +289,7 @@
                                                         SmallChange="{Binding SmallChange}" 
                                                         TickFrequency="{Binding TickFrequency}" Style="{DynamicResource AnnotatedSliderStyle}"
                                                         ValueChanged="Slider_ValueChanged" Height="18" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="Text" Grid.Column="3" Text="{Binding Value, Mode=TwoWay, StringFormat={}{0:#######,##0.#######}}" VerticalContentAlignment="Center" Grid.RowSpan="2" Margin="0,1,1,1"/>
+        <TextBox x:Name="Text" Grid.Column="3" Text="{Binding Value, Mode=TwoWay, StringFormat={}{0:#######,##0.#######}}" VerticalContentAlignment="Center" Grid.RowSpan="2" Margin="0,1"/>
         <Label Grid.Column="4" Content="{Binding Suffix}" VerticalContentAlignment="Center" Grid.RowSpan="2" />
     </Grid>
 </UserControl>

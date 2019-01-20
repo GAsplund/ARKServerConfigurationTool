@@ -10,15 +10,18 @@ using System.Windows.Forms;
 
 namespace ARK_Server_Configuration_Tool
 {
-    class ConfigParser
+    public class ConfigParser
     {
+        public IniData GameUserSettingsIni;
+        public IniData GameIni;
+        public FileIniDataParser Parser;
         public ConfigParser(string FolderPath)
         {
-            var parser = new FileIniDataParser();
+            Parser = new FileIniDataParser();
 
             // Read game configs
-            IniData GameIni = parser.ReadFile(FolderPath + "\\Game.ini");
-            IniData GameUserSettingsIni = parser.ReadFile(FolderPath + "\\GameUserSettings.ini");
+            GameIni = Parser.ReadFile(FolderPath + "\\Game.ini");
+            GameUserSettingsIni = Parser.ReadFile(FolderPath + "\\GameUserSettings.ini");
             
         }
     }

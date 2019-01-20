@@ -101,9 +101,17 @@ namespace ARK_Server_Configuration_Tool
         {
             // A new server is selected, load the info for it
             Prof.LoadProfile(ServerSelectionComboBox.SelectedItem.ToString());
-            dynamic ServerConfig = GlobalVariables.CurrentServerConfig;
-            string SavePath = GlobalVariables.CurrentServerConfig["path"] + "\\ShooterGame\\Saved\\SavedArks\\" + ServerConfig["map"] + ".ark";
-            Task.Factory.StartNew(async () => { await MapInformation.AddWildCreaturesToList(MapInformation.GetWildDinosInMap(SavePath)); });
+            string SavePath;
+            dynamic ServerConfig;
+            Task.Factory.StartNew(async () => 
+            {
+                ServerConfig = GlobalVariables.CurrentServerConfig;
+                SavePath = GlobalVariables.CurrentServerConfig["path"] + "\\ShooterGame\\Saved\\SavedArks\\" + ServerConfig["map"] + ".ark";
+                ConfigParser CurrentConfigInis = new ConfigParser(ServerConfig["path"].ToString() + "\\ShooterGame\\Saved\\Config\\WindowsServer");
+                GlobalVariables.CurrentConfigInis = CurrentConfigInis;
+                await MapInformation.AddWildCreaturesToList(MapInformation.GetWildDinosInMap(SavePath));
+            });
+            
             //Task.Factory.StartNew(async () => { await Prof.LoadProfile(ServerSelectionComboBox.SelectedItem.ToString()); });
             ServerSettingsTabControl.Enabled = true;
             UpdateServerStatusButton.Enabled = true;

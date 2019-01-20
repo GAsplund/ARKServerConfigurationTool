@@ -1,41 +1,61 @@
 {
   "BackEndSettingsTabPage": [
     {
-      "name": "Session Name",
-      "location": "",
+      "name": "SessionName",
+      "displayName": "Session Name",
+      "section": "",
+      "location": "launch",
       "type": "text",
       "default": ""
     },
     {
-      "name": "Max Players",
+      "name": "MaxPlayers",
+      "displayName": "Max Players",
+      "section": "",
+      "location": "launch",
       "type": "slider",
       "range": [ 1, 100 ],
       "default": 10
     },
     {
-      "name": "Query Port",
+      "name": "QueryPort",
+      "displayName": "Query Port",
+      "section": "",
+      "location": "launch",
       "type": "text",
       "default": "27015"
     },
     {
-      "name": "Server Port",
+      "name": "Port",
+      "displayName": "Server Port",
+      "section": "",
+      "location": "launch",
       "type": "text",
       "default": "7777"
     },
     {
-      "name": "RCON Port",
+      "name": "RCONPort",
+      "displayName": "RCON Port",
+      "section": "",
+      "location": "launch",
       "type": "text",
       "default": "27020"
     },
     {
-      "name": "Enable RCON",
+      "name": "RCONEnabled",
+      "displayName": "Enable RCON",
+      "section": "",
+      "location": "launch",
       "type": "bool",
       "default": true
     }
   ],
   "RatesSettingsTabPage": [
     {
-      "name": "Gathering",
+      "name": "HarvestAmountMultiplier",
+      "displayName": "Gathering",
+      "section": "ServerSettings",
+      "location": "GUS",
       "type": "slider",
       "range": [ 1, 20 ]
     }

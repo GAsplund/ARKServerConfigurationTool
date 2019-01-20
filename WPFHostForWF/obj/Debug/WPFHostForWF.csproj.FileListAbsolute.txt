@@ -11,3 +11,4 @@ H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration T
 H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\WPFHostForWF.csproj.CoreCompileInputs.cache
 H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\WPFHostForWF.exe
 H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\WPFHostForWF.pdb
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\WPFHostForWF\obj\Debug\WPFHostForWF.csprojAssemblyReference.cache
