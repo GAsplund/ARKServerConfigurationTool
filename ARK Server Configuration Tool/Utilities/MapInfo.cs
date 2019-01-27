@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ArkSavegameToolkitNet.Domain;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ARK_Server_Configuration_Tool.Utilities
 {
@@ -19,32 +21,45 @@ namespace ARK_Server_Configuration_Tool.Utilities
 
             if (GameData.Update(CancellationToken.None, deferApplyNewData: true)?.Success == true)
             {
-
-                //assign the new data to the domain model
                 GameData.ApplyPreviousUpdate();
-
-                //query the domain model
-                
             }
             return GameData.WildCreatures;
         }
 
-        public async Task DisplayInfo(string DinoClass)
+        public ArkTamedCreature[] GetTamedDinosInMap(string Path)
+        {
+            GameData = new ArkGameData(@Path, loadOnlyPropertiesInDomain: true);
+
+            if (GameData.Update(CancellationToken.None, deferApplyNewData: true)?.Success == true)
+            {
+                GameData.ApplyPreviousUpdate();
+            }
+            return GameData.TamedCreatures;
+        }
+
+        public async Task DisplayInfo(string DinoName)
         {
             MainForm MainForm_Control = System.Windows.Forms.Application.OpenForms.OfType<MainForm>().First();
             MainForm_Control.MapInfoDinoListDataGridView.Rows.Clear();
             // Variable GameData can be called again, since it it already defined when the server data is loaded
-            var calledDinos = GameData.WildCreatures.Where(x => x.ClassName?.Equals(DinoClass) == true).ToArray();
-            foreach (ArkWildCreature dino in calledDinos)
+            var aliases = GlobalVariables.DinoAliases.First.First.Where(x => x.First.ToString().Equals(DinoName) == true).ToArray();
+            string DinoClass = aliases[0][1].ToString();
+            try
             {
-                string[] DinoInfoRow = { dino.Gender.ToString() , dino.BaseLevel.ToString(), dino.Location.Latitude.ToString(), dino.Location.Longitude.ToString(), dino.IsTameable.ToString() };
-                MainForm_Control.MapInfoDinoListDataGridView.Rows.Add(DinoInfoRow);
+                var calledDinos = GameData.WildCreatures.Where(x => x.ClassName?.Equals(DinoClass) == true).ToArray();
+                foreach (ArkWildCreature dino in calledDinos)
+                {
+                    string[] DinoInfoRow = { dino.Gender.ToString(), dino.BaseLevel.ToString(), dino.Location.Latitude.ToString(), dino.Location.Longitude.ToString(), dino.IsTameable.ToString() };
+                    MainForm_Control.MapInfoDinoListDataGridView.Rows.Add(DinoInfoRow);
+                }
+            } catch
+            {
+
             }
         }
 
         public async Task AddWildCreaturesToList(ArkWildCreature[] WildCreatures)
         {
-            
             List<string> WildCreaturesNoDupes = new List<string>();
             foreach (ArkWildCreature WildCreature in WildCreatures)
             {
@@ -55,7 +70,27 @@ namespace ARK_Server_Configuration_Tool.Utilities
             MainForm_Control.MapInfoDinoSelectionComboBox.Items.Clear();
             foreach (string wildCreature in WildCreaturesNoDupes)
             {
-                MainForm_Control.MapInfoDinoSelectionComboBox.Items.Add(wildCreature);
+                var aliases = GlobalVariables.DinoAliases.First.First.Where(x => x[1].ToString().Equals(wildCreature) == true).ToArray();
+                string DinoName = aliases[0][0].ToString();
+                MainForm_Control.MapInfoDinoSelectionComboBox.Items.Add(DinoName);
+            }
+        }
+
+        public async Task AddTamedCreaturesToList(ArkTamedCreature[] TamedCreatures)
+        {
+            List<string> WildCreaturesNoDupes = new List<string>();
+            foreach (ArkTamedCreature TamedCreature in TamedCreatures)
+            {
+                WildCreaturesNoDupes.Add(TamedCreature.ClassName);
+            }
+            WildCreaturesNoDupes = WildCreaturesNoDupes.Distinct().ToList();
+            MainForm MainForm_Control = System.Windows.Forms.Application.OpenForms.OfType<MainForm>().First();
+            MainForm_Control.MapInfoDinoSelectionComboBox.Items.Clear();
+            foreach (string wildCreature in WildCreaturesNoDupes)
+            {
+                var aliases = GlobalVariables.DinoAliases.First.First.Where(x => x[1].ToString().Equals(wildCreature) == true).ToArray();
+                string DinoName = aliases[0][0].ToString();
+                MainForm_Control.MapInfoDinoSelectionComboBox.Items.Add(DinoName);
             }
         }
 

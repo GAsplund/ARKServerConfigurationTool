@@ -26,3 +26,4 @@ H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration T
 H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\WPFHostForWF.exe
 H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\WPFHostForWF.pdb
 H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\WPFHostForWF.exe.config
+H:\Programming Projects\ARK Server Configuration Tool\ARK Server Configuration Tool\ARK Server Configuration Tool\bin\Debug\aliases.json

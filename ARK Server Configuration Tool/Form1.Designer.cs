@@ -39,6 +39,8 @@
             this.SpaceEfficiencyConfigTabPage = new System.Windows.Forms.TabPage();
             this.ClusterConfigTabPage = new System.Windows.Forms.TabPage();
             this.MapInfoTabPage = new System.Windows.Forms.TabPage();
+            this.TamedDinosRadioButton = new System.Windows.Forms.RadioButton();
+            this.WildDinosRadioButton = new System.Windows.Forms.RadioButton();
             this.MapInfoDinoListDataGridView = new System.Windows.Forms.DataGridView();
             this.DinoGenderColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LevelColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -51,13 +53,13 @@
             this.PlayersConfigTabPage = new System.Windows.Forms.TabPage();
             this.DinosConfigTabPage = new System.Windows.Forms.TabPage();
             this.EnvironmentalConfigTabPage = new System.Windows.Forms.TabPage();
+            this.ModsConfigTabPage = new System.Windows.Forms.TabPage();
             this.NewProfileButton = new System.Windows.Forms.Button();
             this.DeleteServerButton = new System.Windows.Forms.Button();
             this.ClusterSelectionComboBox = new System.Windows.Forms.ComboBox();
             this.ClusterSelectorLabel = new System.Windows.Forms.Label();
             this.ClusterStatusLabel = new System.Windows.Forms.Label();
             this.ServerStatusLabel = new System.Windows.Forms.Label();
-            this.ModsConfigTabPage = new System.Windows.Forms.TabPage();
             this.ServerSettingsTabControl.SuspendLayout();
             this.MapInfoTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MapInfoDinoListDataGridView)).BeginInit();
@@ -176,6 +178,8 @@
             // MapInfoTabPage
             // 
             this.MapInfoTabPage.AutoScroll = true;
+            this.MapInfoTabPage.Controls.Add(this.TamedDinosRadioButton);
+            this.MapInfoTabPage.Controls.Add(this.WildDinosRadioButton);
             this.MapInfoTabPage.Controls.Add(this.MapInfoDinoListDataGridView);
             this.MapInfoTabPage.Controls.Add(this.MapInfoDinoSelectionComboBox);
             this.MapInfoTabPage.Controls.Add(this.label1);
@@ -187,6 +191,31 @@
             this.MapInfoTabPage.Text = "Map Info";
             this.MapInfoTabPage.UseVisualStyleBackColor = true;
             // 
+            // TamedDinosRadioButton
+            // 
+            this.TamedDinosRadioButton.AutoSize = true;
+            this.TamedDinosRadioButton.Enabled = false;
+            this.TamedDinosRadioButton.Location = new System.Drawing.Point(211, 31);
+            this.TamedDinosRadioButton.Name = "TamedDinosRadioButton";
+            this.TamedDinosRadioButton.Size = new System.Drawing.Size(88, 17);
+            this.TamedDinosRadioButton.TabIndex = 4;
+            this.TamedDinosRadioButton.Text = "Tamed Dinos";
+            this.TamedDinosRadioButton.UseVisualStyleBackColor = true;
+            this.TamedDinosRadioButton.CheckedChanged += new System.EventHandler(this.TamedDinosRadioButton_CheckedChanged);
+            // 
+            // WildDinosRadioButton
+            // 
+            this.WildDinosRadioButton.AutoSize = true;
+            this.WildDinosRadioButton.Checked = true;
+            this.WildDinosRadioButton.Location = new System.Drawing.Point(211, 11);
+            this.WildDinosRadioButton.Name = "WildDinosRadioButton";
+            this.WildDinosRadioButton.Size = new System.Drawing.Size(76, 17);
+            this.WildDinosRadioButton.TabIndex = 3;
+            this.WildDinosRadioButton.TabStop = true;
+            this.WildDinosRadioButton.Text = "Wild Dinos";
+            this.WildDinosRadioButton.UseVisualStyleBackColor = true;
+            this.WildDinosRadioButton.CheckedChanged += new System.EventHandler(this.WildDinosRadioButton_CheckedChanged);
+            // 
             // MapInfoDinoListDataGridView
             // 
             this.MapInfoDinoListDataGridView.AllowUserToAddRows = false;
@@ -197,11 +226,11 @@
             this.DinoLatitudeColumn,
             this.LongitudeColumn,
             this.TameableColumn});
-            this.MapInfoDinoListDataGridView.Location = new System.Drawing.Point(6, 133);
+            this.MapInfoDinoListDataGridView.Location = new System.Drawing.Point(6, 67);
             this.MapInfoDinoListDataGridView.Name = "MapInfoDinoListDataGridView";
             this.MapInfoDinoListDataGridView.ReadOnly = true;
             this.MapInfoDinoListDataGridView.RowHeadersVisible = false;
-            this.MapInfoDinoListDataGridView.Size = new System.Drawing.Size(1024, 191);
+            this.MapInfoDinoListDataGridView.Size = new System.Drawing.Size(1024, 257);
             this.MapInfoDinoListDataGridView.TabIndex = 2;
             // 
             // DinoGenderColumn
@@ -293,6 +322,15 @@
             this.EnvironmentalConfigTabPage.Text = "Environment";
             this.EnvironmentalConfigTabPage.UseVisualStyleBackColor = true;
             // 
+            // ModsConfigTabPage
+            // 
+            this.ModsConfigTabPage.Location = new System.Drawing.Point(4, 22);
+            this.ModsConfigTabPage.Name = "ModsConfigTabPage";
+            this.ModsConfigTabPage.Size = new System.Drawing.Size(1036, 330);
+            this.ModsConfigTabPage.TabIndex = 8;
+            this.ModsConfigTabPage.Text = "Mods";
+            this.ModsConfigTabPage.UseVisualStyleBackColor = true;
+            // 
             // NewProfileButton
             // 
             this.NewProfileButton.Location = new System.Drawing.Point(244, 74);
@@ -354,15 +392,6 @@
             this.ServerStatusLabel.TabIndex = 16;
             this.ServerStatusLabel.Text = "Server: N/A";
             // 
-            // ModsConfigTabPage
-            // 
-            this.ModsConfigTabPage.Location = new System.Drawing.Point(4, 22);
-            this.ModsConfigTabPage.Name = "ModsConfigTabPage";
-            this.ModsConfigTabPage.Size = new System.Drawing.Size(1036, 330);
-            this.ModsConfigTabPage.TabIndex = 8;
-            this.ModsConfigTabPage.Text = "Mods";
-            this.ModsConfigTabPage.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -419,12 +448,14 @@
         private System.Windows.Forms.TabPage EnvironmentalConfigTabPage;
         public System.Windows.Forms.ComboBox MapInfoDinoSelectionComboBox;
         public System.Windows.Forms.DataGridView MapInfoDinoListDataGridView;
+        private System.Windows.Forms.TabPage ModsConfigTabPage;
+        private System.Windows.Forms.RadioButton TamedDinosRadioButton;
+        private System.Windows.Forms.RadioButton WildDinosRadioButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn DinoGenderColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LevelColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DinoLatitudeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LongitudeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TameableColumn;
-        private System.Windows.Forms.TabPage ModsConfigTabPage;
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -41,7 +42,7 @@ namespace ARK_Server_Configuration_Tool
         {
             if (MessageBox.Show("Are you sure you want to delete the server profile?\n(It will only be forgotten, not deleted)", "Warning", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
             {
-                
+
             }
         }
 
@@ -52,7 +53,13 @@ namespace ARK_Server_Configuration_Tool
 
             Conf.AddConfigForCategories();
 
-            //Task.Factory.StartNew(async() => { await Conf.AddConfigForCategories(); });
+
+            Task.Factory.StartNew(async () =>
+            {
+                GlobalVariables.DinoAliases = JObject.Parse(await System.IO.File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "Aliases.json").ReadToEndAsync());
+                Utilities.MapInfo MapInf = new Utilities.MapInfo();
+                //await MapInformation.AddWildCreaturesToList(MapInformation.GetWildDinosInMap(GlobalVariables.CurrentServerConfig["path"] + "\\ShooterGame\\Saved\\SavedArks\\" + GlobalVariables.CurrentServerConfig["map"] + ".ark"));
+            });
         }
 
         public static Task StartSTATask(Action func)
@@ -103,7 +110,7 @@ namespace ARK_Server_Configuration_Tool
             Prof.LoadProfile(ServerSelectionComboBox.SelectedItem.ToString());
             string SavePath;
             dynamic ServerConfig;
-            Task.Factory.StartNew(async () => 
+            Task.Factory.StartNew(async () =>
             {
                 ServerConfig = GlobalVariables.CurrentServerConfig;
                 SavePath = GlobalVariables.CurrentServerConfig["path"] + "\\ShooterGame\\Saved\\SavedArks\\" + ServerConfig["map"] + ".ark";
@@ -111,7 +118,7 @@ namespace ARK_Server_Configuration_Tool
                 GlobalVariables.CurrentConfigInis = CurrentConfigInis;
                 await MapInformation.AddWildCreaturesToList(MapInformation.GetWildDinosInMap(SavePath));
             });
-            
+
             //Task.Factory.StartNew(async () => { await Prof.LoadProfile(ServerSelectionComboBox.SelectedItem.ToString()); });
             ServerSettingsTabControl.Enabled = true;
             UpdateServerStatusButton.Enabled = true;
@@ -125,7 +132,39 @@ namespace ARK_Server_Configuration_Tool
 
         private void MapInfoDinoSelectionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            MapInformation.DisplayInfo(MapInfoDinoSelectionComboBox.SelectedItem.ToString());
+            try
+            {
+                MapInformation.DisplayInfo(MapInfoDinoSelectionComboBox.SelectedItem.ToString());
+            }
+            catch
+            {
+
+            }
+            
+        }
+
+        private void WildDinosRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (WildDinosRadioButton.Checked == true)
+            {
+                MapInfoDinoListDataGridView.Rows.Clear();
+                Task.Factory.StartNew(async () =>
+                {
+                    await MapInformation.AddWildCreaturesToList(MapInformation.GetWildDinosInMap(GlobalVariables.CurrentServerConfig["path"] + "\\ShooterGame\\Saved\\SavedArks\\" + GlobalVariables.CurrentServerConfig["map"] + ".ark"));
+                });
+            }
+        }
+
+        private void TamedDinosRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (TamedDinosRadioButton.Checked == true)
+            {
+                MapInfoDinoListDataGridView.Rows.Clear();
+                Task.Factory.StartNew(async () =>
+                {
+                    await MapInformation.AddTamedCreaturesToList(MapInformation.GetTamedDinosInMap(GlobalVariables.CurrentServerConfig["path"] + "\\ShooterGame\\Saved\\SavedArks\\" + GlobalVariables.CurrentServerConfig["map"] + ".ark"));
+                });
+            }
         }
     }
 }

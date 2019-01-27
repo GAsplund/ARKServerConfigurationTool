@@ -19,6 +19,8 @@ namespace ARK_Server_Configuration_Tool
 
         public static JObject SettingsList = new JObject();
 
+        public static JObject DinoAliases = new JObject();
+
         public static ConfigParser CurrentConfigInis;
     }
 }
