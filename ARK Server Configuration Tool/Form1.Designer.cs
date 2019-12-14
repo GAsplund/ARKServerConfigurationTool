@@ -37,6 +37,14 @@
             this.ServerSettingsTabControl = new System.Windows.Forms.TabControl();
             this.BackEndSettingsTabPage = new System.Windows.Forms.TabPage();
             this.SpaceEfficiencyConfigTabPage = new System.Windows.Forms.TabPage();
+            this.refreshSpaceUsageButton = new System.Windows.Forms.Button();
+            this.globalDataLocationBrowseButton = new System.Windows.Forms.Button();
+            this.globalDataLocationTextBox = new System.Windows.Forms.TextBox();
+            this.spaceEfficiencyExperimentalLabel = new System.Windows.Forms.Label();
+            this.enableGlobalDataCheckBox = new System.Windows.Forms.CheckBox();
+            this.allServersSpaceUsageLabel = new System.Windows.Forms.Label();
+            this.globalDataSpaceUsageLabel = new System.Windows.Forms.Label();
+            this.serverSpaceUsageLabel = new System.Windows.Forms.Label();
             this.ClusterConfigTabPage = new System.Windows.Forms.TabPage();
             this.MapInfoTabPage = new System.Windows.Forms.TabPage();
             this.TamedDinosRadioButton = new System.Windows.Forms.RadioButton();
@@ -60,9 +68,28 @@
             this.ClusterSelectorLabel = new System.Windows.Forms.Label();
             this.ClusterStatusLabel = new System.Windows.Forms.Label();
             this.ServerStatusLabel = new System.Windows.Forms.Label();
+            this.modsListDataGridView = new System.Windows.Forms.DataGridView();
+            this.ModSortColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ModIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ModNameColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastDownloadColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastModUpdateColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ModSizeColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.updateModButton = new System.Windows.Forms.Button();
+            this.increadeModIndexButton = new System.Windows.Forms.Button();
+            this.decreaseModIndexButton = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.modIndexLabel = new System.Windows.Forms.Label();
+            this.modSortingComboBox = new System.Windows.Forms.ComboBox();
+            this.modSortingLabel = new System.Windows.Forms.Label();
+            this.modNameLabel = new System.Windows.Forms.Label();
+            this.globalServerDataLocationLabel = new System.Windows.Forms.Label();
             this.ServerSettingsTabControl.SuspendLayout();
+            this.SpaceEfficiencyConfigTabPage.SuspendLayout();
             this.MapInfoTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MapInfoDinoListDataGridView)).BeginInit();
+            this.ModsConfigTabPage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.modsListDataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // ServerSelectionComboBox
@@ -106,6 +133,7 @@
             this.SaveAndWriteSettingsButton.TabIndex = 7;
             this.SaveAndWriteSettingsButton.Text = "Save Settings";
             this.SaveAndWriteSettingsButton.UseVisualStyleBackColor = true;
+            this.SaveAndWriteSettingsButton.Click += new System.EventHandler(this.SaveAndWriteSettingsButton_Click);
             // 
             // ProfileSelectorLabel
             // 
@@ -159,12 +187,98 @@
             // 
             // SpaceEfficiencyConfigTabPage
             // 
+            this.SpaceEfficiencyConfigTabPage.Controls.Add(this.globalServerDataLocationLabel);
+            this.SpaceEfficiencyConfigTabPage.Controls.Add(this.refreshSpaceUsageButton);
+            this.SpaceEfficiencyConfigTabPage.Controls.Add(this.globalDataLocationBrowseButton);
+            this.SpaceEfficiencyConfigTabPage.Controls.Add(this.globalDataLocationTextBox);
+            this.SpaceEfficiencyConfigTabPage.Controls.Add(this.spaceEfficiencyExperimentalLabel);
+            this.SpaceEfficiencyConfigTabPage.Controls.Add(this.enableGlobalDataCheckBox);
+            this.SpaceEfficiencyConfigTabPage.Controls.Add(this.allServersSpaceUsageLabel);
+            this.SpaceEfficiencyConfigTabPage.Controls.Add(this.globalDataSpaceUsageLabel);
+            this.SpaceEfficiencyConfigTabPage.Controls.Add(this.serverSpaceUsageLabel);
             this.SpaceEfficiencyConfigTabPage.Location = new System.Drawing.Point(4, 22);
             this.SpaceEfficiencyConfigTabPage.Name = "SpaceEfficiencyConfigTabPage";
             this.SpaceEfficiencyConfigTabPage.Size = new System.Drawing.Size(1036, 330);
             this.SpaceEfficiencyConfigTabPage.TabIndex = 2;
             this.SpaceEfficiencyConfigTabPage.Text = "Space Efficiency";
             this.SpaceEfficiencyConfigTabPage.UseVisualStyleBackColor = true;
+            // 
+            // refreshSpaceUsageButton
+            // 
+            this.refreshSpaceUsageButton.Location = new System.Drawing.Point(390, 18);
+            this.refreshSpaceUsageButton.Name = "refreshSpaceUsageButton";
+            this.refreshSpaceUsageButton.Size = new System.Drawing.Size(75, 23);
+            this.refreshSpaceUsageButton.TabIndex = 7;
+            this.refreshSpaceUsageButton.Text = "Refresh";
+            this.refreshSpaceUsageButton.UseVisualStyleBackColor = true;
+            this.refreshSpaceUsageButton.Click += new System.EventHandler(this.refreshSpaceUsageButton_Click);
+            // 
+            // globalDataLocationBrowseButton
+            // 
+            this.globalDataLocationBrowseButton.Enabled = false;
+            this.globalDataLocationBrowseButton.Location = new System.Drawing.Point(440, 107);
+            this.globalDataLocationBrowseButton.Name = "globalDataLocationBrowseButton";
+            this.globalDataLocationBrowseButton.Size = new System.Drawing.Size(83, 22);
+            this.globalDataLocationBrowseButton.TabIndex = 6;
+            this.globalDataLocationBrowseButton.Text = "Browse...";
+            this.globalDataLocationBrowseButton.UseVisualStyleBackColor = true;
+            this.globalDataLocationBrowseButton.Click += new System.EventHandler(this.globalDataLocationBrowseButton_Click);
+            // 
+            // globalDataLocationTextBox
+            // 
+            this.globalDataLocationTextBox.Enabled = false;
+            this.globalDataLocationTextBox.Location = new System.Drawing.Point(16, 108);
+            this.globalDataLocationTextBox.Name = "globalDataLocationTextBox";
+            this.globalDataLocationTextBox.Size = new System.Drawing.Size(419, 20);
+            this.globalDataLocationTextBox.TabIndex = 5;
+            this.globalDataLocationTextBox.Text = "          ";
+            // 
+            // spaceEfficiencyExperimentalLabel
+            // 
+            this.spaceEfficiencyExperimentalLabel.AutoSize = true;
+            this.spaceEfficiencyExperimentalLabel.Location = new System.Drawing.Point(193, 67);
+            this.spaceEfficiencyExperimentalLabel.Name = "spaceEfficiencyExperimentalLabel";
+            this.spaceEfficiencyExperimentalLabel.Size = new System.Drawing.Size(331, 13);
+            this.spaceEfficiencyExperimentalLabel.TabIndex = 4;
+            this.spaceEfficiencyExperimentalLabel.Text = "Warning: This feature is experimental and may cause server crashes.";
+            // 
+            // enableGlobalDataCheckBox
+            // 
+            this.enableGlobalDataCheckBox.AutoSize = true;
+            this.enableGlobalDataCheckBox.Location = new System.Drawing.Point(16, 66);
+            this.enableGlobalDataCheckBox.Name = "enableGlobalDataCheckBox";
+            this.enableGlobalDataCheckBox.Size = new System.Drawing.Size(152, 17);
+            this.enableGlobalDataCheckBox.TabIndex = 3;
+            this.enableGlobalDataCheckBox.Text = "Enable Global Server Data";
+            this.enableGlobalDataCheckBox.UseVisualStyleBackColor = true;
+            this.enableGlobalDataCheckBox.CheckedChanged += new System.EventHandler(this.enableGlobalDataCheckBox_CheckedChanged);
+            // 
+            // allServersSpaceUsageLabel
+            // 
+            this.allServersSpaceUsageLabel.AutoSize = true;
+            this.allServersSpaceUsageLabel.Location = new System.Drawing.Point(13, 36);
+            this.allServersSpaceUsageLabel.Name = "allServersSpaceUsageLabel";
+            this.allServersSpaceUsageLabel.Size = new System.Drawing.Size(151, 13);
+            this.allServersSpaceUsageLabel.TabIndex = 2;
+            this.allServersSpaceUsageLabel.Text = "All Servers Space Usage: N/A";
+            // 
+            // globalDataSpaceUsageLabel
+            // 
+            this.globalDataSpaceUsageLabel.AutoSize = true;
+            this.globalDataSpaceUsageLabel.Location = new System.Drawing.Point(13, 23);
+            this.globalDataSpaceUsageLabel.Name = "globalDataSpaceUsageLabel";
+            this.globalDataSpaceUsageLabel.Size = new System.Drawing.Size(157, 13);
+            this.globalDataSpaceUsageLabel.TabIndex = 1;
+            this.globalDataSpaceUsageLabel.Text = "Global Data Space Usage: N/A";
+            // 
+            // serverSpaceUsageLabel
+            // 
+            this.serverSpaceUsageLabel.AutoSize = true;
+            this.serverSpaceUsageLabel.Location = new System.Drawing.Point(13, 10);
+            this.serverSpaceUsageLabel.Name = "serverSpaceUsageLabel";
+            this.serverSpaceUsageLabel.Size = new System.Drawing.Size(132, 13);
+            this.serverSpaceUsageLabel.TabIndex = 0;
+            this.serverSpaceUsageLabel.Text = "Server Space Usage: N/A";
             // 
             // ClusterConfigTabPage
             // 
@@ -219,6 +333,7 @@
             // MapInfoDinoListDataGridView
             // 
             this.MapInfoDinoListDataGridView.AllowUserToAddRows = false;
+            this.MapInfoDinoListDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
             this.MapInfoDinoListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.MapInfoDinoListDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.DinoGenderColumn,
@@ -324,6 +439,15 @@
             // 
             // ModsConfigTabPage
             // 
+            this.ModsConfigTabPage.Controls.Add(this.modsListDataGridView);
+            this.ModsConfigTabPage.Controls.Add(this.updateModButton);
+            this.ModsConfigTabPage.Controls.Add(this.increadeModIndexButton);
+            this.ModsConfigTabPage.Controls.Add(this.decreaseModIndexButton);
+            this.ModsConfigTabPage.Controls.Add(this.textBox1);
+            this.ModsConfigTabPage.Controls.Add(this.modIndexLabel);
+            this.ModsConfigTabPage.Controls.Add(this.modSortingComboBox);
+            this.ModsConfigTabPage.Controls.Add(this.modSortingLabel);
+            this.ModsConfigTabPage.Controls.Add(this.modNameLabel);
             this.ModsConfigTabPage.Location = new System.Drawing.Point(4, 22);
             this.ModsConfigTabPage.Name = "ModsConfigTabPage";
             this.ModsConfigTabPage.Size = new System.Drawing.Size(1036, 330);
@@ -392,6 +516,149 @@
             this.ServerStatusLabel.TabIndex = 16;
             this.ServerStatusLabel.Text = "Server: N/A";
             // 
+            // modsListDataGridView
+            // 
+            this.modsListDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.modsListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.modsListDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ModSortColumn,
+            this.ModIdColumn,
+            this.ModNameColumn,
+            this.LastDownloadColumn,
+            this.LastModUpdateColumn,
+            this.ModSizeColumn});
+            this.modsListDataGridView.Location = new System.Drawing.Point(2, 83);
+            this.modsListDataGridView.Name = "modsListDataGridView";
+            this.modsListDataGridView.ReadOnly = true;
+            this.modsListDataGridView.RowHeadersVisible = false;
+            this.modsListDataGridView.Size = new System.Drawing.Size(1031, 244);
+            this.modsListDataGridView.TabIndex = 9;
+            // 
+            // ModSortColumn
+            // 
+            this.ModSortColumn.HeaderText = "Num";
+            this.ModSortColumn.Name = "ModSortColumn";
+            this.ModSortColumn.ReadOnly = true;
+            // 
+            // ModIdColumn
+            // 
+            this.ModIdColumn.HeaderText = "ID";
+            this.ModIdColumn.Name = "ModIdColumn";
+            this.ModIdColumn.ReadOnly = true;
+            // 
+            // ModNameColumn
+            // 
+            this.ModNameColumn.HeaderText = "Name";
+            this.ModNameColumn.Name = "ModNameColumn";
+            this.ModNameColumn.ReadOnly = true;
+            // 
+            // LastDownloadColumn
+            // 
+            this.LastDownloadColumn.HeaderText = "Last Download";
+            this.LastDownloadColumn.Name = "LastDownloadColumn";
+            this.LastDownloadColumn.ReadOnly = true;
+            // 
+            // LastModUpdateColumn
+            // 
+            this.LastModUpdateColumn.HeaderText = "Last Mod Update";
+            this.LastModUpdateColumn.Name = "LastModUpdateColumn";
+            this.LastModUpdateColumn.ReadOnly = true;
+            // 
+            // ModSizeColumn
+            // 
+            this.ModSizeColumn.HeaderText = "Mod Size";
+            this.ModSizeColumn.Name = "ModSizeColumn";
+            this.ModSizeColumn.ReadOnly = true;
+            // 
+            // updateModButton
+            // 
+            this.updateModButton.Enabled = false;
+            this.updateModButton.Location = new System.Drawing.Point(271, 53);
+            this.updateModButton.Name = "updateModButton";
+            this.updateModButton.Size = new System.Drawing.Size(83, 23);
+            this.updateModButton.TabIndex = 17;
+            this.updateModButton.Text = "Update mod";
+            this.updateModButton.UseVisualStyleBackColor = true;
+            // 
+            // increadeModIndexButton
+            // 
+            this.increadeModIndexButton.Enabled = false;
+            this.increadeModIndexButton.Location = new System.Drawing.Point(85, 54);
+            this.increadeModIndexButton.Name = "increadeModIndexButton";
+            this.increadeModIndexButton.Size = new System.Drawing.Size(24, 22);
+            this.increadeModIndexButton.TabIndex = 16;
+            this.increadeModIndexButton.Text = "+";
+            this.increadeModIndexButton.UseVisualStyleBackColor = true;
+            // 
+            // decreaseModIndexButton
+            // 
+            this.decreaseModIndexButton.Enabled = false;
+            this.decreaseModIndexButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.decreaseModIndexButton.Location = new System.Drawing.Point(110, 54);
+            this.decreaseModIndexButton.Name = "decreaseModIndexButton";
+            this.decreaseModIndexButton.Size = new System.Drawing.Size(24, 22);
+            this.decreaseModIndexButton.TabIndex = 15;
+            this.decreaseModIndexButton.Text = "-";
+            this.decreaseModIndexButton.UseVisualStyleBackColor = true;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Enabled = false;
+            this.textBox1.Location = new System.Drawing.Point(9, 55);
+            this.textBox1.MaxLength = 5;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(70, 20);
+            this.textBox1.TabIndex = 14;
+            // 
+            // modIndexLabel
+            // 
+            this.modIndexLabel.AutoSize = true;
+            this.modIndexLabel.Location = new System.Drawing.Point(6, 39);
+            this.modIndexLabel.Name = "modIndexLabel";
+            this.modIndexLabel.Size = new System.Drawing.Size(57, 13);
+            this.modIndexLabel.TabIndex = 13;
+            this.modIndexLabel.Text = "Mod Index";
+            // 
+            // modSortingComboBox
+            // 
+            this.modSortingComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.modSortingComboBox.FormattingEnabled = true;
+            this.modSortingComboBox.Items.AddRange(new object[] {
+            "None",
+            "Size"});
+            this.modSortingComboBox.Location = new System.Drawing.Point(140, 54);
+            this.modSortingComboBox.Name = "modSortingComboBox";
+            this.modSortingComboBox.Size = new System.Drawing.Size(125, 21);
+            this.modSortingComboBox.TabIndex = 12;
+            // 
+            // modSortingLabel
+            // 
+            this.modSortingLabel.AutoSize = true;
+            this.modSortingLabel.Location = new System.Drawing.Point(137, 38);
+            this.modSortingLabel.Name = "modSortingLabel";
+            this.modSortingLabel.Size = new System.Drawing.Size(67, 13);
+            this.modSortingLabel.TabIndex = 11;
+            this.modSortingLabel.Text = "Mod Sorting:";
+            // 
+            // modNameLabel
+            // 
+            this.modNameLabel.AutoSize = true;
+            this.modNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.modNameLabel.Location = new System.Drawing.Point(5, 5);
+            this.modNameLabel.Name = "modNameLabel";
+            this.modNameLabel.Size = new System.Drawing.Size(179, 26);
+            this.modNameLabel.TabIndex = 10;
+            this.modNameLabel.Text = "No Mod Selected";
+            // 
+            // globalServerDataLocationLabel
+            // 
+            this.globalServerDataLocationLabel.AutoSize = true;
+            this.globalServerDataLocationLabel.Location = new System.Drawing.Point(13, 90);
+            this.globalServerDataLocationLabel.Name = "globalServerDataLocationLabel";
+            this.globalServerDataLocationLabel.Size = new System.Drawing.Size(144, 13);
+            this.globalServerDataLocationLabel.TabIndex = 8;
+            this.globalServerDataLocationLabel.Text = "Global Server Data Location:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -415,9 +682,14 @@
             this.Text = "ARK Server Configuration Tool";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ServerSettingsTabControl.ResumeLayout(false);
+            this.SpaceEfficiencyConfigTabPage.ResumeLayout(false);
+            this.SpaceEfficiencyConfigTabPage.PerformLayout();
             this.MapInfoTabPage.ResumeLayout(false);
             this.MapInfoTabPage.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.MapInfoDinoListDataGridView)).EndInit();
+            this.ModsConfigTabPage.ResumeLayout(false);
+            this.ModsConfigTabPage.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.modsListDataGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -451,11 +723,35 @@
         private System.Windows.Forms.TabPage ModsConfigTabPage;
         private System.Windows.Forms.RadioButton TamedDinosRadioButton;
         private System.Windows.Forms.RadioButton WildDinosRadioButton;
+        private System.Windows.Forms.Label spaceEfficiencyExperimentalLabel;
+        private System.Windows.Forms.CheckBox enableGlobalDataCheckBox;
+        private System.Windows.Forms.Label allServersSpaceUsageLabel;
+        private System.Windows.Forms.Label globalDataSpaceUsageLabel;
+        private System.Windows.Forms.Label serverSpaceUsageLabel;
+        private System.Windows.Forms.Button globalDataLocationBrowseButton;
+        private System.Windows.Forms.TextBox globalDataLocationTextBox;
+        private System.Windows.Forms.Button refreshSpaceUsageButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn DinoGenderColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LevelColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn DinoLatitudeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LongitudeColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn TameableColumn;
+        private System.Windows.Forms.DataGridView modsListDataGridView;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModSortColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModIdColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModNameColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LastDownloadColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn LastModUpdateColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ModSizeColumn;
+        private System.Windows.Forms.Button updateModButton;
+        private System.Windows.Forms.Button increadeModIndexButton;
+        private System.Windows.Forms.Button decreaseModIndexButton;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label modIndexLabel;
+        private System.Windows.Forms.ComboBox modSortingComboBox;
+        private System.Windows.Forms.Label modSortingLabel;
+        private System.Windows.Forms.Label modNameLabel;
+        private System.Windows.Forms.Label globalServerDataLocationLabel;
     }
 }
 

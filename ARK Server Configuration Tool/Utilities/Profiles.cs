@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using ARK_Server_Configuration_Tool.Structs;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,11 @@ namespace ARK_Server_Configuration_Tool.Utilities
 {
     class Profiles
     {
+        public static ServerProfile currentProfile;
 
+        /// <summary>
+        /// Loads all server profiles.
+        /// </summary>
         public void GetProfiles()
         {
             MainForm MainForm_Control = Application.OpenForms.OfType<MainForm>().First();
@@ -48,6 +53,9 @@ namespace ARK_Server_Configuration_Tool.Utilities
 
         }
 
+        /// <summary>
+        /// Loads all server clusters.
+        /// </summary>
         public void GetClusters()
         {
             MainForm MainForm_Control = Application.OpenForms.OfType<MainForm>().First();
@@ -61,6 +69,10 @@ namespace ARK_Server_Configuration_Tool.Utilities
             }
         }
 
+        /// <summary>
+        /// Loads specific profile specified by its name.
+        /// </summary>
+        /// <param name="ProfileName"></param>
         public void LoadProfile(string ProfileName)
         {
             string illegal = ProfileName;
@@ -71,14 +83,19 @@ namespace ARK_Server_Configuration_Tool.Utilities
             {
                 throw new FileNotFoundException("The file for the profile was not found.");
             }
-            JObject ServerInfo = JObject.Parse(File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + r.Replace(illegal, "") + "\\profile.json"));
-
-            GlobalVariables.CurrentServerConfig = ServerInfo;
+            Utilities.Profiles.currentProfile = JsonConvert.DeserializeObject<ServerProfile>(File.ReadAllText(
+                AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + r.Replace(illegal, "") + "\\profile.json"), new Settings.SettingConverterProfile());
 
         }
 
+        /// <summary>
+        /// Creates a new profile specified by the profiles directory and the profile name.
+        /// </summary>
+        /// <param name="RootDir">The path of the folder containing all profiles</param>
+        /// <param name="ProfileName">The name of the profile</param>
         public void CreateProfile(string RootDir, string ProfileName)
         {
+            ServerProfile newProfile = new ServerProfile();
             // Ask user to create chosen directory if it doesn't exist
             if (!Directory.Exists(RootDir))
             {
@@ -101,14 +118,12 @@ namespace ARK_Server_Configuration_Tool.Utilities
             FileStream ServerInfoFile = File.Create(ProfileDir + "\\profile.json");
             ServerInfoFile.Close();
 
-            dynamic ServerInfo = new JObject();
-
-            // Write initial data to JSON
-            GlobalVariables.CurrentServerConfig["path"] = RootDir;
-            GlobalVariables.CurrentServerConfig["name"] = ProfileName;
+            // Write initial data to Profile
+            newProfile.path = RootDir;
+            newProfile.name = ProfileName;
 
             // Write data to JSON file
-            File.WriteAllText(ProfileDir + "\\profile.json", JsonConvert.SerializeObject(ServerInfo, Formatting.Indented));
+            File.WriteAllText(ProfileDir + "\\profile.json", JsonConvert.SerializeObject(newProfile));
 
             // Update the profile list
 

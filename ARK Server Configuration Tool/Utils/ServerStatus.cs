@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
+using ARK_Server_Configuration_Tool.Structs;
 
 namespace ARK_Server_Configuration_Tool
 {
@@ -150,7 +151,7 @@ namespace ARK_Server_Configuration_Tool
                 externalIP = (new WebClient()).DownloadString("http://checkip.dyndns.org/");
                 externalIP = (new Regex(@"\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}"))
                              .Matches(externalIP)[0].ToString();
-                return new ServerStatus(new IPEndPoint(IPAddress.Parse(externalIP), Convert.ToInt32(GlobalVariables.CurrentServerConfig["queryPort"]))).IsOnline;
+                return new ServerStatus(new IPEndPoint(IPAddress.Parse(externalIP), Convert.ToInt32(Utilities.Profiles.currentProfile.queryPort))).IsOnline;
             }
             catch { return false; }
         }
@@ -169,7 +170,7 @@ namespace ARK_Server_Configuration_Tool
 
         public Status CheckServerStatus()
         {
-            string BinaryLocation = GlobalVariables.CurrentServerConfig["path"] + "\\ShooterGame\\Binaries\\Win64\\ShooterGameServer.exe";
+            string BinaryLocation = Utilities.Profiles.currentProfile.path + "\\ShooterGame\\Binaries\\Win64\\ShooterGameServer.exe";
             if (!File.Exists(BinaryLocation))
             {
                 return Status.Not_Installed;

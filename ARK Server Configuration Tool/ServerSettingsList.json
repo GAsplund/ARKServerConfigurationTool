@@ -3,7 +3,7 @@
     {
       "name": "SessionName",
       "displayName": "Session Name",
-      "section": "",
+      "argType": "",
       "location": "launch",
       "type": "text",
       "default": ""
@@ -11,7 +11,7 @@
     {
       "name": "MaxPlayers",
       "displayName": "Max Players",
-      "section": "",
+      "argType": "?",
       "location": "launch",
       "type": "slider",
       "range": [ 1, 100 ],
@@ -20,7 +20,7 @@
     {
       "name": "QueryPort",
       "displayName": "Query Port",
-      "section": "",
+      "argType": "",
       "location": "launch",
       "type": "text",
       "default": "27015"
@@ -28,7 +28,7 @@
     {
       "name": "Port",
       "displayName": "Server Port",
-      "section": "",
+      "argType": "",
       "location": "launch",
       "type": "text",
       "default": "7777"
@@ -36,7 +36,7 @@
     {
       "name": "RCONPort",
       "displayName": "RCON Port",
-      "section": "",
+      "argType": "?",
       "location": "launch",
       "type": "text",
       "default": "27020"
@@ -44,10 +44,18 @@
     {
       "name": "RCONEnabled",
       "displayName": "Enable RCON",
-      "section": "",
+      "argType": "?",
       "location": "launch",
       "type": "bool",
       "default": true
+    },
+    {
+      "name": "USEALLAVAILABLECORES",
+      "displayName": "Use All Available Cores",
+      "argType": "-",
+      "location": "launch",
+      "type": "bool",
+      "default":  false
     }
   ],
   "RatesSettingsTabPage": [

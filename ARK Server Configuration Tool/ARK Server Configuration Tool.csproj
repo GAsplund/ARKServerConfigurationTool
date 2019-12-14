@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ArkSavegameToolkitNet, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ArkSavegameToolkitNet.1.9.0\lib\net461\ArkSavegameToolkitNet.dll</HintPath>
@@ -38,17 +41,35 @@
     <Reference Include="ArkSavegameToolkitNet.Domain, Version=1.9.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ArkSavegameToolkitNet.1.9.0\lib\net461\ArkSavegameToolkitNet.Domain.dll</HintPath>
     </Reference>
+    <Reference Include="CorApi, Version=0.0.0.0, Culture=neutral, PublicKeyToken=450f4c3039fb2f70, processorArchitecture=MSIL">
+      <HintPath>..\packages\MDbg.0.1.0\lib\net40\CorApi.dll</HintPath>
+    </Reference>
+    <Reference Include="CorApiRaw, Version=0.0.0.0, Culture=neutral, PublicKeyToken=450f4c3039fb2f70, processorArchitecture=MSIL">
+      <HintPath>..\packages\MDbg.0.1.0\lib\net40\CorApiRaw.dll</HintPath>
+    </Reference>
     <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
       <HintPath>..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MDbgEng, Version=0.0.0.0, Culture=neutral, PublicKeyToken=450f4c3039fb2f70, processorArchitecture=MSIL">
+      <HintPath>..\packages\MDbg.0.1.0\lib\net40\MDbgEng.dll</HintPath>
+    </Reference>
+    <Reference Include="MDbgExt, Version=0.0.0.0, Culture=neutral, PublicKeyToken=450f4c3039fb2f70, processorArchitecture=MSIL">
+      <HintPath>..\packages\MDbg.0.1.0\lib\net40\MDbgExt.dll</HintPath>
+    </Reference>
+    <Reference Include="MdbgUtility, Version=0.0.0.0, Culture=neutral, PublicKeyToken=450f4c3039fb2f70, processorArchitecture=MSIL">
+      <HintPath>..\packages\MDbg.0.1.0\lib\net40\MdbgUtility.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAPICodePack-Core.1.1.1\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\WindowsAPICodePack-Shell.1.1.1\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
+    <Reference Include="NativeDebugWrappers, Version=0.0.0.0, Culture=neutral, PublicKeyToken=450f4c3039fb2f70, processorArchitecture=MSIL">
+      <HintPath>..\packages\MDbg.0.1.0\lib\net40\NativeDebugWrappers.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -72,8 +93,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigUI.cs" />
-    <Compile Include="GlobalVariables.cs" />
-    <Compile Include="ServerInfo\ConfigParser.cs" />
+    <Compile Include="Dinos.cs" />
+    <Compile Include="Structs\LaunchSetting.cs" />
+    <Compile Include="Structs\Cluster.cs" />
+    <Compile Include="Structs\GameSetting.cs" />
+    <Compile Include="Structs\GUSSetting.cs" />
+    <Compile Include="Structs\ServerProfile.cs" />
+    <Compile Include="Structs\Server.cs" />
+    <Compile Include="Utilities\AbstractJsonConverter.cs" />
+    <Compile Include="Utils\ConfigParser.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,7 +116,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServerInfo\ServerStatus.cs" />
+    <Compile Include="Utils\ServerStatus.cs" />
+    <Compile Include="Structs\Setting.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Utilities\MapInfo.cs" />
     <Compile Include="Utilities\Profiles.cs" />
     <EmbeddedResource Include="MainForm.resx">

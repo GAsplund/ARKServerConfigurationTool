@@ -10,6 +10,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ARK_Server_Configuration_Tool.Structs;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace ARK_Server_Configuration_Tool
 {
@@ -32,12 +36,18 @@ namespace ARK_Server_Configuration_Tool
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Create a new server profile
+        /// </summary>
         private void NewProfileButton_Click(object sender, EventArgs e)
         {
             NewServerProfileForm NewProfile = new NewServerProfileForm();
             NewProfile.ShowDialog();
         }
 
+        /// <summary>
+        /// Delete a server profile
+        /// </summary>
         private void DeleteServerButton_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Are you sure you want to delete the server profile?\n(It will only be forgotten, not deleted)", "Warning", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.Yes)
@@ -48,15 +58,19 @@ namespace ARK_Server_Configuration_Tool
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            MapInfoDinoListDataGridView.Columns["LevelColumn"].ValueType = typeof(int);
+            MapInfoDinoListDataGridView.Columns[MapInfoDinoListDataGridView.Columns.Count -1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+
             Prof.GetProfiles();
             Prof.GetClusters();
 
             Conf.AddConfigForCategories();
 
 
+
             Task.Factory.StartNew(async () =>
             {
-                GlobalVariables.DinoAliases = JObject.Parse(await System.IO.File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "Aliases.json").ReadToEndAsync());
+                Dinos.DinoAliases = JObject.Parse(await System.IO.File.OpenText(AppDomain.CurrentDomain.BaseDirectory + "Aliases.json").ReadToEndAsync());
                 Utilities.MapInfo MapInf = new Utilities.MapInfo();
                 //await MapInformation.AddWildCreaturesToList(MapInformation.GetWildDinosInMap(GlobalVariables.CurrentServerConfig["path"] + "\\ShooterGame\\Saved\\SavedArks\\" + GlobalVariables.CurrentServerConfig["map"] + ".ark"));
             });
@@ -82,12 +96,17 @@ namespace ARK_Server_Configuration_Tool
             return tcs.Task;
         }
 
+        /// <summary>
+        /// Manually update server status.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void UpdateServerStatusButton_Click(object sender, EventArgs e)
         {
             ServerStatusLabel.Text = "Server: Getting status...";
             Task.Factory.StartNew(async () =>
             {
-                ServerStatus Status = new ServerStatus(new IPEndPoint(IPAddress.Parse("127.0.0.1"), Convert.ToInt32(GlobalVariables.CurrentServerConfig["queryPort"])));
+                ServerStatus Status = new ServerStatus(new IPEndPoint(IPAddress.Parse("127.0.0.1"), Utilities.Profiles.currentProfile.queryPort));
                 if (ServerStatusLabel.InvokeRequired)
                 {
                     ServerStatusLabel.Invoke(new MethodInvoker(delegate
@@ -104,19 +123,20 @@ namespace ARK_Server_Configuration_Tool
 
         }
 
+        /// <summary>
+        /// Select new server.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ServerSelectionComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // A new server is selected, load the info for it
             Prof.LoadProfile(ServerSelectionComboBox.SelectedItem.ToString());
-            string SavePath;
-            dynamic ServerConfig;
             Task.Factory.StartNew(async () =>
             {
-                ServerConfig = GlobalVariables.CurrentServerConfig;
-                SavePath = GlobalVariables.CurrentServerConfig["path"] + "\\ShooterGame\\Saved\\SavedArks\\" + ServerConfig["map"] + ".ark";
-                ConfigParser CurrentConfigInis = new ConfigParser(ServerConfig["path"].ToString() + "\\ShooterGame\\Saved\\Config\\WindowsServer");
-                GlobalVariables.CurrentConfigInis = CurrentConfigInis;
-                await MapInformation.AddWildCreaturesToList(MapInformation.GetWildDinosInMap(SavePath));
+                //ConfigParser CurrentConfigInis = new ConfigParser(ServerConfig["path"].ToString() + "\\ShooterGame\\Saved\\Config\\WindowsServer");
+                //GlobalVariables.CurrentConfigInis = CurrentConfigInis;
+                await MapInformation.AddWildCreaturesToList(MapInformation.GetWildDinosInMap(Utilities.Profiles.currentProfile.savepath));
             });
 
             //Task.Factory.StartNew(async () => { await Prof.LoadProfile(ServerSelectionComboBox.SelectedItem.ToString()); });
@@ -134,7 +154,7 @@ namespace ARK_Server_Configuration_Tool
         {
             try
             {
-                MapInformation.DisplayInfo(MapInfoDinoSelectionComboBox.SelectedItem.ToString());
+                MapInformation.DisplayInfo(MapInfoDinoSelectionComboBox.SelectedItem.ToString(), MapInfoDinoListDataGridView);
             }
             catch
             {
@@ -150,7 +170,7 @@ namespace ARK_Server_Configuration_Tool
                 MapInfoDinoListDataGridView.Rows.Clear();
                 Task.Factory.StartNew(async () =>
                 {
-                    await MapInformation.AddWildCreaturesToList(MapInformation.GetWildDinosInMap(GlobalVariables.CurrentServerConfig["path"] + "\\ShooterGame\\Saved\\SavedArks\\" + GlobalVariables.CurrentServerConfig["map"] + ".ark"));
+                    await MapInformation.AddWildCreaturesToList(MapInformation.GetWildDinosInMap(Utilities.Profiles.currentProfile.savepath));
                 });
             }
         }
@@ -162,9 +182,97 @@ namespace ARK_Server_Configuration_Tool
                 MapInfoDinoListDataGridView.Rows.Clear();
                 Task.Factory.StartNew(async () =>
                 {
-                    await MapInformation.AddTamedCreaturesToList(MapInformation.GetTamedDinosInMap(GlobalVariables.CurrentServerConfig["path"] + "\\ShooterGame\\Saved\\SavedArks\\" + GlobalVariables.CurrentServerConfig["map"] + ".ark"));
+                    await MapInformation.AddTamedCreaturesToList(MapInformation.GetTamedDinosInMap(Utilities.Profiles.currentProfile.savepath));
                 });
             }
         }
+
+        private void SaveAndWriteSettingsButton_Click(object sender, EventArgs e)
+        {
+            Utilities.Profiles.currentProfile.saveSettings();
+            Utilities.Profiles.currentProfile.save();
+        }
+
+        private void globalDataLocationBrowseButton_Click(object sender, EventArgs e)
+        {
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog
+            {
+                //InitialDirectory = "C:\\Users";
+                IsFolderPicker = true
+            };
+
+            if (dialog.ShowDialog(this.Handle) == CommonFileDialogResult.Ok)
+            {
+                globalDataLocationTextBox.Text = dialog.FileName;
+            }
+        }
+
+        private void enableGlobalDataCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            globalDataLocationTextBox.Enabled = enableGlobalDataCheckBox.Checked;
+            globalDataLocationBrowseButton.Enabled = enableGlobalDataCheckBox.Checked;
+        }
+
+        private void refreshSpaceUsageButton_Click(object sender, EventArgs e)
+        {
+            serverSpaceUsageLabel.Text = "Server Space Usage: Calculating...";
+            Task.Factory.StartNew(async () =>
+            {
+                string serverSpaceUsageString = "Server Space Usage: " + SizeSuffix(DirectorySize(new System.IO.DirectoryInfo(Utilities.Profiles.currentProfile.path), true), 2);
+                if (serverSpaceUsageLabel.InvokeRequired)
+                {
+                    this.Invoke(new MethodInvoker(delegate
+                    {
+                        serverSpaceUsageLabel.Text = serverSpaceUsageString;
+                    }));
+                }
+                else
+                {
+                    serverSpaceUsageLabel.Text = serverSpaceUsageString;
+                }
+            });
+            
+        }
+
+        static long DirectorySize(System.IO.DirectoryInfo dInfo, bool includeSubDir)
+        {
+            long totalSize = dInfo.EnumerateFiles()
+                         .Sum(file => file.Length);
+            if (includeSubDir)
+            {
+                totalSize += dInfo.EnumerateDirectories()
+                         .Sum(dir => DirectorySize(dir, true));
+            }
+            return totalSize;
+        }
+
+        static readonly string[] SizeSuffixes =
+                   { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
+        static string SizeSuffix(Int64 value, int decimalPlaces = 1)
+        {
+            if (decimalPlaces < 0) { throw new ArgumentOutOfRangeException("decimalPlaces"); }
+            if (value < 0) { return "-" + SizeSuffix(-value); }
+            if (value == 0) { return string.Format("{0:n" + decimalPlaces + "} bytes", 0); }
+
+            // mag is 0 for bytes, 1 for KB, 2, for MB, etc.
+            int mag = (int)Math.Log(value, 1024);
+
+            // 1L << (mag * 10) == 2 ^ (10 * mag) 
+            // [i.e. the number of bytes in the unit corresponding to mag]
+            decimal adjustedSize = (decimal)value / (1L << (mag * 10));
+
+            // make adjustment when the value is large enough that
+            // it would round up to 1000 or more
+            if (Math.Round(adjustedSize, decimalPlaces) >= 1000)
+            {
+                mag += 1;
+                adjustedSize /= 1024;
+            }
+
+            return string.Format("{0:n" + decimalPlaces + "} {1}",
+                adjustedSize,
+                SizeSuffixes[mag]);
+        }
+
     }
 }
