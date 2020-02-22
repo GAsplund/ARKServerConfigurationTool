@@ -8,6 +8,7 @@ namespace ARK_Server_Configuration_Tool.Structs
 {
     class Server
     {
-        ServerProfile profile;
+        public ServerStatus.Status Status;
+        public ServerProfile Profile;
     }
 }

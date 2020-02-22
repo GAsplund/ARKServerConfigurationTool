@@ -9,13 +9,16 @@ using System.Threading.Tasks;
 
 namespace ARK_Server_Configuration_Tool.Structs
 {
-    class ServerProfile
+    public class ServerProfile
     {
         Server server;
         public string name;
         public string path;
+        public bool UseGlobalData;
 
         public Dictionary<string, Setting> settings = new Dictionary<string, Setting>();
+        public SortedDictionary<int, Mod> mods = new SortedDictionary<int, Mod>();
+
         [JsonIgnore]
         public string savepath
         {
@@ -24,6 +27,11 @@ namespace ARK_Server_Configuration_Tool.Structs
                 return path + "\\ShooterGame\\Saved\\SavedArks\\" + map + ".ark";
             }
         }
+
+        // TODO: Remove these eventually
+        public string map;
+        public UInt16 port = 7777;
+        public UInt16 queryPort = 27015;
 
         public bool saveSettings()
         {
@@ -38,16 +46,16 @@ namespace ARK_Server_Configuration_Tool.Structs
                 switch (setting.GetType().Name)
                 {
                     case "GameSetting":
-                        GameSettings.Add(setting.name + "=" + setting.value);
+                        GameSettings.Add(setting.Name + "=" + setting.value);
                         break;
                     case "GUSSetting":
                         GUSSetting gussetting = (GUSSetting)setting;
                         if (gussetting.section == null) continue;
                         if (!GameUserSettings.ContainsKey(gussetting.section))
                         {
-                            List<string> newList = new List<string> { setting.configName + "=" + setting.value };
+                            List<string> newList = new List<string> { setting.ConfigName + "=" + setting.value };
                             GameUserSettings.Add(gussetting.section, newList);
-                        } else GameUserSettings[gussetting.section].Add(setting.configName + "=" + setting.value);
+                        } else GameUserSettings[gussetting.section].Add(setting.ConfigName + "=" + setting.value);
                         break;
                     case "LaunchSetting":
                         LaunchSettings.Add((LaunchSetting)setting);
@@ -72,11 +80,11 @@ namespace ARK_Server_Configuration_Tool.Structs
             LaunchString += map;
             foreach(LaunchSetting setting in LaunchSettings.Where(s => s.type == LaunchSetting.Type.QuestionMark))
             {
-                LaunchString += "?" + setting.configName + "=" + setting.value;
+                LaunchString += "?" + setting.ConfigName + "=" + setting.value;
             }
             foreach (LaunchSetting setting in LaunchSettings.Where(s => s.type == LaunchSetting.Type.Dash))
             {
-                LaunchString += " -" + setting.configName;
+                LaunchString += " -" + setting.ConfigName;
             }
 
 
@@ -123,9 +131,5 @@ namespace ARK_Server_Configuration_Tool.Structs
             }
 
         }
-
-        public string map;
-        public UInt16 port = 7777;
-        public UInt16 queryPort = 27015;
     }
 }

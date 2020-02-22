@@ -8,9 +8,10 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ARK_Server_Configuration_Tool</RootNamespace>
     <AssemblyName>ARK Server Configuration Tool</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +51,9 @@
     <Reference Include="INIFileParser, Version=2.5.2.0, Culture=neutral, PublicKeyToken=79af7b307b65cf3c, processorArchitecture=MSIL">
       <HintPath>..\packages\ini-parser.2.5.2\lib\net20\INIFileParser.dll</HintPath>
     </Reference>
+    <Reference Include="Ionic.Zlib, Version=1.9.1.5, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ionic.Zlib.1.9.1.5\lib\Ionic.Zlib.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
@@ -78,6 +82,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -92,39 +97,61 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AddModForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddModForm.Designer.cs">
+      <DependentUpon>AddModForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConfigUI.cs" />
     <Compile Include="Dinos.cs" />
     <Compile Include="Structs\LaunchSetting.cs" />
     <Compile Include="Structs\Cluster.cs" />
     <Compile Include="Structs\GameSetting.cs" />
     <Compile Include="Structs\GUSSetting.cs" />
+    <Compile Include="Structs\Mod.cs" />
+    <Compile Include="Structs\Mods.cs" />
     <Compile Include="Structs\ServerProfile.cs" />
     <Compile Include="Structs\Server.cs" />
-    <Compile Include="Utilities\AbstractJsonConverter.cs" />
-    <Compile Include="Utils\ConfigParser.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Structs\SteamWorkshopFile.cs" />
+    <Compile Include="Forms\UpdaterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="Forms\UpdaterForm.Designer.cs">
+      <DependentUpon>UpdaterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utilities\AbstractJsonConverter.cs" />
+    <Compile Include="Utilities\ModUtils.cs" />
+    <Compile Include="Utilities\SpaceUsage.cs" />
+    <Compile Include="Utilities\SteamCmd.cs" />
+    <Compile Include="Utilities\SteamWorkshop.cs" />
+    <Compile Include="Utilities\ConfigParser.cs" />
+    <Compile Include="Forms\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Form1.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewServerProfileForm.cs">
+    <Compile Include="Forms\NewServerProfileForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewServerProfileForm.Designer.cs">
+    <Compile Include="Forms\NewServerProfileForm.Designer.cs">
       <DependentUpon>NewServerProfileForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utils\ServerStatus.cs" />
+    <Compile Include="Utilities\ServerStatus.cs" />
     <Compile Include="Structs\Setting.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Utilities\MapInfo.cs" />
     <Compile Include="Utilities\Profiles.cs" />
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\AddModForm.resx">
+      <DependentUpon>AddModForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewServerProfileForm.resx">
+    <EmbeddedResource Include="Forms\NewServerProfileForm.resx">
       <DependentUpon>NewServerProfileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -135,7 +162,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Forms\UpdaterForm.resx">
+      <DependentUpon>UpdaterForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="aliases.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

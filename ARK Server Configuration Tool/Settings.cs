@@ -35,7 +35,7 @@ namespace ARK_Server_Configuration_Tool
         {
             protected override Setting Create(Type objectType, JObject jObject, string path)
             {
-                string settingType = defaultSettings.Where(s => s.configName == path).First().GetType().Name;
+                string settingType = defaultSettings.Where(s => s.ConfigName == path).First().GetType().Name;
 
                 switch (settingType)
                 {

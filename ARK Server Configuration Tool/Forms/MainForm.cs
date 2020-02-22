@@ -14,6 +14,7 @@ using ARK_Server_Configuration_Tool.Structs;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using ARK_Server_Configuration_Tool.Utilities;
 
 namespace ARK_Server_Configuration_Tool
 {
@@ -59,7 +60,8 @@ namespace ARK_Server_Configuration_Tool
         private void MainForm_Load(object sender, EventArgs e)
         {
             MapInfoDinoListDataGridView.Columns["LevelColumn"].ValueType = typeof(int);
-            MapInfoDinoListDataGridView.Columns[MapInfoDinoListDataGridView.Columns.Count -1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            MapInfoDinoListDataGridView.Columns[MapInfoDinoListDataGridView.Columns.Count - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            modsListDataGridView.Columns[modsListDataGridView.Columns.Count - 1].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             Prof.GetProfiles();
             Prof.GetClusters();
@@ -74,26 +76,6 @@ namespace ARK_Server_Configuration_Tool
                 Utilities.MapInfo MapInf = new Utilities.MapInfo();
                 //await MapInformation.AddWildCreaturesToList(MapInformation.GetWildDinosInMap(GlobalVariables.CurrentServerConfig["path"] + "\\ShooterGame\\Saved\\SavedArks\\" + GlobalVariables.CurrentServerConfig["map"] + ".ark"));
             });
-        }
-
-        public static Task StartSTATask(Action func)
-        {
-            var tcs = new TaskCompletionSource<object>();
-            var thread = new Thread(() =>
-            {
-                try
-                {
-                    func();
-                    tcs.SetResult(null);
-                }
-                catch (Exception e)
-                {
-                    tcs.SetException(e);
-                }
-            });
-            thread.SetApartmentState(ApartmentState.STA);
-            thread.Start();
-            return tcs.Task;
         }
 
         /// <summary>
@@ -114,10 +96,7 @@ namespace ARK_Server_Configuration_Tool
                         ServerStatusLabel.Text = ("Server: " + Status.CheckServerStatus().ToString().Replace("_", " "));
                     }));
                 }
-                else
-                {
-                    ServerStatusLabel.Text = ("Server: " + Status.CheckServerStatus().ToString().Replace("_", " "));
-                }
+                else ServerStatusLabel.Text = ("Server: " + Status.CheckServerStatus().ToString().Replace("_", " "));
 
             });
 
@@ -158,7 +137,7 @@ namespace ARK_Server_Configuration_Tool
             }
             catch
             {
-
+                
             }
             
         }
@@ -218,7 +197,7 @@ namespace ARK_Server_Configuration_Tool
             serverSpaceUsageLabel.Text = "Server Space Usage: Calculating...";
             Task.Factory.StartNew(async () =>
             {
-                string serverSpaceUsageString = "Server Space Usage: " + SizeSuffix(DirectorySize(new System.IO.DirectoryInfo(Utilities.Profiles.currentProfile.path), true), 2);
+                string serverSpaceUsageString = "Server Space Usage: " + SpaceUsage.SizeSuffix(SpaceUsage.DirectorySize(new System.IO.DirectoryInfo(Utilities.Profiles.currentProfile.path), true), 2);
                 if (serverSpaceUsageLabel.InvokeRequired)
                 {
                     this.Invoke(new MethodInvoker(delegate
@@ -234,45 +213,60 @@ namespace ARK_Server_Configuration_Tool
             
         }
 
-        static long DirectorySize(System.IO.DirectoryInfo dInfo, bool includeSubDir)
+        private void addModButton_Click(object sender, EventArgs e)
         {
-            long totalSize = dInfo.EnumerateFiles()
-                         .Sum(file => file.Length);
-            if (includeSubDir)
-            {
-                totalSize += dInfo.EnumerateDirectories()
-                         .Sum(dir => DirectorySize(dir, true));
-            }
-            return totalSize;
+            AddModForm addMod = new AddModForm();
+            addMod.Show();
         }
 
-        static readonly string[] SizeSuffixes =
-                   { "bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB" };
-        static string SizeSuffix(Int64 value, int decimalPlaces = 1)
+        private void updateModButton_Click(object sender, EventArgs e)
         {
-            if (decimalPlaces < 0) { throw new ArgumentOutOfRangeException("decimalPlaces"); }
-            if (value < 0) { return "-" + SizeSuffix(-value); }
-            if (value == 0) { return string.Format("{0:n" + decimalPlaces + "} bytes", 0); }
-
-            // mag is 0 for bytes, 1 for KB, 2, for MB, etc.
-            int mag = (int)Math.Log(value, 1024);
-
-            // 1L << (mag * 10) == 2 ^ (10 * mag) 
-            // [i.e. the number of bytes in the unit corresponding to mag]
-            decimal adjustedSize = (decimal)value / (1L << (mag * 10));
-
-            // make adjustment when the value is large enough that
-            // it would round up to 1000 or more
-            if (Math.Round(adjustedSize, decimalPlaces) >= 1000)
-            {
-                mag += 1;
-                adjustedSize /= 1024;
-            }
-
-            return string.Format("{0:n" + decimalPlaces + "} {1}",
-                adjustedSize,
-                SizeSuffixes[mag]);
+            UpdaterForm updater = new UpdaterForm(Utilities.Profiles.currentProfile);
+            Mod tempMod = new Mod { Id = Convert.ToUInt32(modsListDataGridView.SelectedRows[0].Cells[1].Value) };
+            updater.UpdateMod(tempMod, false);
+            updater.ShowDialog();
         }
 
+        private void modsListDataGridView_CellContentClick(object sender, DataGridViewRowStateChangedEventArgs e)
+        {
+            if (modsListDataGridView.SelectedRows.Count == 0)
+            {
+                modNameLabel.Text = "No Mod Selected";
+                return;
+            }
+            else if (modsListDataGridView.SelectedRows[0].Cells[2].Value == null || modsListDataGridView.SelectedRows[0].Cells[2].Value == "")
+            { 
+                modNameLabel.Text = "(Unknown Mod Name)";
+                modIndexTextBox.Text = modsListDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+            }
+            else
+            { 
+                modNameLabel.Text = modsListDataGridView.SelectedRows[0].Cells[2].Value.ToString();
+                modIndexTextBox.Text = modsListDataGridView.SelectedRows[0].Cells[0].Value.ToString();
+            }
+
+            decreaseModIndexButton.Enabled = modsListDataGridView.SelectedRows[0].Cells[0].Value.ToString() != "1";
+            increadeModIndexButton.Enabled = modsListDataGridView.SelectedRows[0].Cells[0].Value.ToString() != modsListDataGridView.Rows.Count.ToString();
+        }
+
+        private void deleteModButton_Click(object sender, EventArgs e)
+        {
+            SortedDictionary<int, Mod> mods = Profiles.currentProfile.mods;
+            DataGridViewRow row = modsListDataGridView.SelectedRows[0];
+            mods.Remove(Convert.ToInt32(row.Cells[0].Value));
+            mods = Mods.SortKeys(mods);
+            Profiles.currentProfile.mods = mods;
+            ConfigUI.LoadProfileMods(Profiles.currentProfile.mods);
+        }
+
+        private void increadeModIndexButton_Click(object sender, EventArgs e)
+        {
+            ConfigUI.MoveModUpDown(true);
+        }
+
+        private void decreaseModIndexButton_Click(object sender, EventArgs e)
+        {
+            ConfigUI.MoveModUpDown(false);
+        }
     }
 }

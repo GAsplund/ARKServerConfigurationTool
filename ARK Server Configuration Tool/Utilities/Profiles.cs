@@ -83,8 +83,10 @@ namespace ARK_Server_Configuration_Tool.Utilities
             {
                 throw new FileNotFoundException("The file for the profile was not found.");
             }
-            Utilities.Profiles.currentProfile = JsonConvert.DeserializeObject<ServerProfile>(File.ReadAllText(
+            currentProfile = JsonConvert.DeserializeObject<ServerProfile>(File.ReadAllText(
                 AppDomain.CurrentDomain.BaseDirectory + "Profiles\\" + r.Replace(illegal, "") + "\\profile.json"), new Settings.SettingConverterProfile());
+            ConfigUI.LoadProfileSettings(currentProfile.settings);
+            ConfigUI.LoadProfileMods(currentProfile.mods);
 
         }
 

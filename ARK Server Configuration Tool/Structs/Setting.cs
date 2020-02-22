@@ -10,41 +10,40 @@ using System.Windows.Forms;
 namespace ARK_Server_Configuration_Tool
 {
 
-    abstract class Setting
+    public abstract class Setting
     {
         public enum SyncSetting { Server, Cluster }
 
-        public SyncSetting sync = SyncSetting.Server;
+        public SyncSetting Sync = SyncSetting.Server;
 
         [JsonProperty("displayName")]
-        public string name;
+        public string Name;
+        public bool ShouldSerializename() { return false; }
         [JsonProperty("name")]
-        public string configName;
+        public string ConfigName;
+        public bool ShouldSerializeconfigName() { return false; }
         public dynamic value;
         [JsonProperty("default")]
-        public dynamic defaultValue;
+        public dynamic DefaultValue;
+        public bool ShouldSerializedefaultValue() { return false; }
         [JsonIgnore]
         private IniData file;
         [JsonProperty("type")]
-        public string inputType;
-        public int[] range = new int[2];
-
-        public bool ShouldSerializename() { return false; }
-        public bool ShouldSerializeconfigName() { return false; }
+        public string InputType;
         public bool ShouldSerializeinputType() { return false; }
-        public bool ShouldSerializedefaultValue() { return false; }
+        public int[] Range = new int[2];
         public bool ShouldSerializerange() { return false; }
+        
 
-        public bool save()
+        public bool Save()
         {
-            switch (sync)
+            switch (Sync)
             {
                 case SyncSetting.Server:
-                    Utilities.Profiles.currentProfile.settings[configName] = this;
+                    Utilities.Profiles.currentProfile.settings[ConfigName] = this;
                     break;
                 case SyncSetting.Cluster:
                     return false;
-                    break;
             }
             return true;
         }
@@ -52,7 +51,7 @@ namespace ARK_Server_Configuration_Tool
         //public bool save()
         //{
         //    string ConfigPath = GlobalVariables.CurrentServerConfig["path"].ToString() + "\\ShooterGame\\Saved\\Config\\WindowsServer";
-            
+        //  
         //    switch (location)
         //    {
         //        case SettingLocation.LaunchArgument: // Launch argument

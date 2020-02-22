@@ -37,6 +37,7 @@
             this.ServerSettingsTabControl = new System.Windows.Forms.TabControl();
             this.BackEndSettingsTabPage = new System.Windows.Forms.TabPage();
             this.SpaceEfficiencyConfigTabPage = new System.Windows.Forms.TabPage();
+            this.globalServerDataLocationLabel = new System.Windows.Forms.Label();
             this.refreshSpaceUsageButton = new System.Windows.Forms.Button();
             this.globalDataLocationBrowseButton = new System.Windows.Forms.Button();
             this.globalDataLocationTextBox = new System.Windows.Forms.TextBox();
@@ -62,12 +63,8 @@
             this.DinosConfigTabPage = new System.Windows.Forms.TabPage();
             this.EnvironmentalConfigTabPage = new System.Windows.Forms.TabPage();
             this.ModsConfigTabPage = new System.Windows.Forms.TabPage();
-            this.NewProfileButton = new System.Windows.Forms.Button();
-            this.DeleteServerButton = new System.Windows.Forms.Button();
-            this.ClusterSelectionComboBox = new System.Windows.Forms.ComboBox();
-            this.ClusterSelectorLabel = new System.Windows.Forms.Label();
-            this.ClusterStatusLabel = new System.Windows.Forms.Label();
-            this.ServerStatusLabel = new System.Windows.Forms.Label();
+            this.deleteModButton = new System.Windows.Forms.Button();
+            this.addModButton = new System.Windows.Forms.Button();
             this.modsListDataGridView = new System.Windows.Forms.DataGridView();
             this.ModSortColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ModIdColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -78,12 +75,17 @@
             this.updateModButton = new System.Windows.Forms.Button();
             this.increadeModIndexButton = new System.Windows.Forms.Button();
             this.decreaseModIndexButton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.modIndexTextBox = new System.Windows.Forms.TextBox();
             this.modIndexLabel = new System.Windows.Forms.Label();
             this.modSortingComboBox = new System.Windows.Forms.ComboBox();
             this.modSortingLabel = new System.Windows.Forms.Label();
             this.modNameLabel = new System.Windows.Forms.Label();
-            this.globalServerDataLocationLabel = new System.Windows.Forms.Label();
+            this.NewProfileButton = new System.Windows.Forms.Button();
+            this.DeleteServerButton = new System.Windows.Forms.Button();
+            this.ClusterSelectionComboBox = new System.Windows.Forms.ComboBox();
+            this.ClusterSelectorLabel = new System.Windows.Forms.Label();
+            this.ClusterStatusLabel = new System.Windows.Forms.Label();
+            this.ServerStatusLabel = new System.Windows.Forms.Label();
             this.ServerSettingsTabControl.SuspendLayout();
             this.SpaceEfficiencyConfigTabPage.SuspendLayout();
             this.MapInfoTabPage.SuspendLayout();
@@ -202,6 +204,15 @@
             this.SpaceEfficiencyConfigTabPage.TabIndex = 2;
             this.SpaceEfficiencyConfigTabPage.Text = "Space Efficiency";
             this.SpaceEfficiencyConfigTabPage.UseVisualStyleBackColor = true;
+            // 
+            // globalServerDataLocationLabel
+            // 
+            this.globalServerDataLocationLabel.AutoSize = true;
+            this.globalServerDataLocationLabel.Location = new System.Drawing.Point(13, 90);
+            this.globalServerDataLocationLabel.Name = "globalServerDataLocationLabel";
+            this.globalServerDataLocationLabel.Size = new System.Drawing.Size(144, 13);
+            this.globalServerDataLocationLabel.TabIndex = 8;
+            this.globalServerDataLocationLabel.Text = "Global Server Data Location:";
             // 
             // refreshSpaceUsageButton
             // 
@@ -439,11 +450,13 @@
             // 
             // ModsConfigTabPage
             // 
+            this.ModsConfigTabPage.Controls.Add(this.deleteModButton);
+            this.ModsConfigTabPage.Controls.Add(this.addModButton);
             this.ModsConfigTabPage.Controls.Add(this.modsListDataGridView);
             this.ModsConfigTabPage.Controls.Add(this.updateModButton);
             this.ModsConfigTabPage.Controls.Add(this.increadeModIndexButton);
             this.ModsConfigTabPage.Controls.Add(this.decreaseModIndexButton);
-            this.ModsConfigTabPage.Controls.Add(this.textBox1);
+            this.ModsConfigTabPage.Controls.Add(this.modIndexTextBox);
             this.ModsConfigTabPage.Controls.Add(this.modIndexLabel);
             this.ModsConfigTabPage.Controls.Add(this.modSortingComboBox);
             this.ModsConfigTabPage.Controls.Add(this.modSortingLabel);
@@ -454,6 +467,163 @@
             this.ModsConfigTabPage.TabIndex = 8;
             this.ModsConfigTabPage.Text = "Mods";
             this.ModsConfigTabPage.UseVisualStyleBackColor = true;
+            // 
+            // deleteModButton
+            // 
+            this.deleteModButton.Location = new System.Drawing.Point(449, 53);
+            this.deleteModButton.Name = "deleteModButton";
+            this.deleteModButton.Size = new System.Drawing.Size(83, 23);
+            this.deleteModButton.TabIndex = 19;
+            this.deleteModButton.Text = "Delete Mod";
+            this.deleteModButton.UseVisualStyleBackColor = true;
+            this.deleteModButton.Click += new System.EventHandler(this.deleteModButton_Click);
+            // 
+            // addModButton
+            // 
+            this.addModButton.Location = new System.Drawing.Point(360, 53);
+            this.addModButton.Name = "addModButton";
+            this.addModButton.Size = new System.Drawing.Size(83, 23);
+            this.addModButton.TabIndex = 18;
+            this.addModButton.Text = "Add Mod";
+            this.addModButton.UseVisualStyleBackColor = true;
+            this.addModButton.Click += new System.EventHandler(this.addModButton_Click);
+            // 
+            // modsListDataGridView
+            // 
+            this.modsListDataGridView.AllowUserToAddRows = false;
+            this.modsListDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.modsListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.modsListDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ModSortColumn,
+            this.ModIdColumn,
+            this.ModNameColumn,
+            this.LastDownloadColumn,
+            this.LastModUpdateColumn,
+            this.ModSizeColumn});
+            this.modsListDataGridView.Location = new System.Drawing.Point(2, 83);
+            this.modsListDataGridView.Name = "modsListDataGridView";
+            this.modsListDataGridView.ReadOnly = true;
+            this.modsListDataGridView.RowHeadersVisible = false;
+            this.modsListDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.modsListDataGridView.Size = new System.Drawing.Size(1031, 244);
+            this.modsListDataGridView.TabIndex = 9;
+            this.modsListDataGridView.RowStateChanged += new System.Windows.Forms.DataGridViewRowStateChangedEventHandler(this.modsListDataGridView_CellContentClick);
+            // 
+            // ModSortColumn
+            // 
+            this.ModSortColumn.HeaderText = "Num";
+            this.ModSortColumn.Name = "ModSortColumn";
+            this.ModSortColumn.ReadOnly = true;
+            // 
+            // ModIdColumn
+            // 
+            this.ModIdColumn.HeaderText = "ID";
+            this.ModIdColumn.Name = "ModIdColumn";
+            this.ModIdColumn.ReadOnly = true;
+            // 
+            // ModNameColumn
+            // 
+            this.ModNameColumn.HeaderText = "Name";
+            this.ModNameColumn.Name = "ModNameColumn";
+            this.ModNameColumn.ReadOnly = true;
+            // 
+            // LastDownloadColumn
+            // 
+            this.LastDownloadColumn.HeaderText = "Last Download";
+            this.LastDownloadColumn.Name = "LastDownloadColumn";
+            this.LastDownloadColumn.ReadOnly = true;
+            // 
+            // LastModUpdateColumn
+            // 
+            this.LastModUpdateColumn.HeaderText = "Last Mod Update";
+            this.LastModUpdateColumn.Name = "LastModUpdateColumn";
+            this.LastModUpdateColumn.ReadOnly = true;
+            // 
+            // ModSizeColumn
+            // 
+            this.ModSizeColumn.HeaderText = "Mod Size";
+            this.ModSizeColumn.Name = "ModSizeColumn";
+            this.ModSizeColumn.ReadOnly = true;
+            // 
+            // updateModButton
+            // 
+            this.updateModButton.Location = new System.Drawing.Point(271, 53);
+            this.updateModButton.Name = "updateModButton";
+            this.updateModButton.Size = new System.Drawing.Size(83, 23);
+            this.updateModButton.TabIndex = 17;
+            this.updateModButton.Text = "Update mod";
+            this.updateModButton.UseVisualStyleBackColor = true;
+            this.updateModButton.Click += new System.EventHandler(this.updateModButton_Click);
+            // 
+            // increadeModIndexButton
+            // 
+            this.increadeModIndexButton.Location = new System.Drawing.Point(85, 54);
+            this.increadeModIndexButton.Name = "increadeModIndexButton";
+            this.increadeModIndexButton.Size = new System.Drawing.Size(24, 22);
+            this.increadeModIndexButton.TabIndex = 16;
+            this.increadeModIndexButton.Text = "+";
+            this.increadeModIndexButton.UseVisualStyleBackColor = true;
+            this.increadeModIndexButton.Click += new System.EventHandler(this.increadeModIndexButton_Click);
+            // 
+            // decreaseModIndexButton
+            // 
+            this.decreaseModIndexButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.decreaseModIndexButton.Location = new System.Drawing.Point(110, 54);
+            this.decreaseModIndexButton.Name = "decreaseModIndexButton";
+            this.decreaseModIndexButton.Size = new System.Drawing.Size(24, 22);
+            this.decreaseModIndexButton.TabIndex = 15;
+            this.decreaseModIndexButton.Text = "-";
+            this.decreaseModIndexButton.UseVisualStyleBackColor = true;
+            this.decreaseModIndexButton.Click += new System.EventHandler(this.decreaseModIndexButton_Click);
+            // 
+            // modIndexTextBox
+            // 
+            this.modIndexTextBox.Enabled = false;
+            this.modIndexTextBox.Location = new System.Drawing.Point(9, 55);
+            this.modIndexTextBox.MaxLength = 5;
+            this.modIndexTextBox.Name = "modIndexTextBox";
+            this.modIndexTextBox.Size = new System.Drawing.Size(70, 20);
+            this.modIndexTextBox.TabIndex = 14;
+            // 
+            // modIndexLabel
+            // 
+            this.modIndexLabel.AutoSize = true;
+            this.modIndexLabel.Location = new System.Drawing.Point(6, 39);
+            this.modIndexLabel.Name = "modIndexLabel";
+            this.modIndexLabel.Size = new System.Drawing.Size(57, 13);
+            this.modIndexLabel.TabIndex = 13;
+            this.modIndexLabel.Text = "Mod Index";
+            // 
+            // modSortingComboBox
+            // 
+            this.modSortingComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.modSortingComboBox.FormattingEnabled = true;
+            this.modSortingComboBox.Items.AddRange(new object[] {
+            "None",
+            "Size"});
+            this.modSortingComboBox.Location = new System.Drawing.Point(140, 54);
+            this.modSortingComboBox.Name = "modSortingComboBox";
+            this.modSortingComboBox.Size = new System.Drawing.Size(125, 21);
+            this.modSortingComboBox.TabIndex = 12;
+            // 
+            // modSortingLabel
+            // 
+            this.modSortingLabel.AutoSize = true;
+            this.modSortingLabel.Location = new System.Drawing.Point(137, 38);
+            this.modSortingLabel.Name = "modSortingLabel";
+            this.modSortingLabel.Size = new System.Drawing.Size(67, 13);
+            this.modSortingLabel.TabIndex = 11;
+            this.modSortingLabel.Text = "Mod Sorting:";
+            // 
+            // modNameLabel
+            // 
+            this.modNameLabel.AutoSize = true;
+            this.modNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
+            this.modNameLabel.Location = new System.Drawing.Point(5, 5);
+            this.modNameLabel.Name = "modNameLabel";
+            this.modNameLabel.Size = new System.Drawing.Size(179, 26);
+            this.modNameLabel.TabIndex = 10;
+            this.modNameLabel.Text = "No Mod Selected";
             // 
             // NewProfileButton
             // 
@@ -515,149 +685,6 @@
             this.ServerStatusLabel.Size = new System.Drawing.Size(81, 17);
             this.ServerStatusLabel.TabIndex = 16;
             this.ServerStatusLabel.Text = "Server: N/A";
-            // 
-            // modsListDataGridView
-            // 
-            this.modsListDataGridView.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.modsListDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.modsListDataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ModSortColumn,
-            this.ModIdColumn,
-            this.ModNameColumn,
-            this.LastDownloadColumn,
-            this.LastModUpdateColumn,
-            this.ModSizeColumn});
-            this.modsListDataGridView.Location = new System.Drawing.Point(2, 83);
-            this.modsListDataGridView.Name = "modsListDataGridView";
-            this.modsListDataGridView.ReadOnly = true;
-            this.modsListDataGridView.RowHeadersVisible = false;
-            this.modsListDataGridView.Size = new System.Drawing.Size(1031, 244);
-            this.modsListDataGridView.TabIndex = 9;
-            // 
-            // ModSortColumn
-            // 
-            this.ModSortColumn.HeaderText = "Num";
-            this.ModSortColumn.Name = "ModSortColumn";
-            this.ModSortColumn.ReadOnly = true;
-            // 
-            // ModIdColumn
-            // 
-            this.ModIdColumn.HeaderText = "ID";
-            this.ModIdColumn.Name = "ModIdColumn";
-            this.ModIdColumn.ReadOnly = true;
-            // 
-            // ModNameColumn
-            // 
-            this.ModNameColumn.HeaderText = "Name";
-            this.ModNameColumn.Name = "ModNameColumn";
-            this.ModNameColumn.ReadOnly = true;
-            // 
-            // LastDownloadColumn
-            // 
-            this.LastDownloadColumn.HeaderText = "Last Download";
-            this.LastDownloadColumn.Name = "LastDownloadColumn";
-            this.LastDownloadColumn.ReadOnly = true;
-            // 
-            // LastModUpdateColumn
-            // 
-            this.LastModUpdateColumn.HeaderText = "Last Mod Update";
-            this.LastModUpdateColumn.Name = "LastModUpdateColumn";
-            this.LastModUpdateColumn.ReadOnly = true;
-            // 
-            // ModSizeColumn
-            // 
-            this.ModSizeColumn.HeaderText = "Mod Size";
-            this.ModSizeColumn.Name = "ModSizeColumn";
-            this.ModSizeColumn.ReadOnly = true;
-            // 
-            // updateModButton
-            // 
-            this.updateModButton.Enabled = false;
-            this.updateModButton.Location = new System.Drawing.Point(271, 53);
-            this.updateModButton.Name = "updateModButton";
-            this.updateModButton.Size = new System.Drawing.Size(83, 23);
-            this.updateModButton.TabIndex = 17;
-            this.updateModButton.Text = "Update mod";
-            this.updateModButton.UseVisualStyleBackColor = true;
-            // 
-            // increadeModIndexButton
-            // 
-            this.increadeModIndexButton.Enabled = false;
-            this.increadeModIndexButton.Location = new System.Drawing.Point(85, 54);
-            this.increadeModIndexButton.Name = "increadeModIndexButton";
-            this.increadeModIndexButton.Size = new System.Drawing.Size(24, 22);
-            this.increadeModIndexButton.TabIndex = 16;
-            this.increadeModIndexButton.Text = "+";
-            this.increadeModIndexButton.UseVisualStyleBackColor = true;
-            // 
-            // decreaseModIndexButton
-            // 
-            this.decreaseModIndexButton.Enabled = false;
-            this.decreaseModIndexButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.decreaseModIndexButton.Location = new System.Drawing.Point(110, 54);
-            this.decreaseModIndexButton.Name = "decreaseModIndexButton";
-            this.decreaseModIndexButton.Size = new System.Drawing.Size(24, 22);
-            this.decreaseModIndexButton.TabIndex = 15;
-            this.decreaseModIndexButton.Text = "-";
-            this.decreaseModIndexButton.UseVisualStyleBackColor = true;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(9, 55);
-            this.textBox1.MaxLength = 5;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(70, 20);
-            this.textBox1.TabIndex = 14;
-            // 
-            // modIndexLabel
-            // 
-            this.modIndexLabel.AutoSize = true;
-            this.modIndexLabel.Location = new System.Drawing.Point(6, 39);
-            this.modIndexLabel.Name = "modIndexLabel";
-            this.modIndexLabel.Size = new System.Drawing.Size(57, 13);
-            this.modIndexLabel.TabIndex = 13;
-            this.modIndexLabel.Text = "Mod Index";
-            // 
-            // modSortingComboBox
-            // 
-            this.modSortingComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.modSortingComboBox.FormattingEnabled = true;
-            this.modSortingComboBox.Items.AddRange(new object[] {
-            "None",
-            "Size"});
-            this.modSortingComboBox.Location = new System.Drawing.Point(140, 54);
-            this.modSortingComboBox.Name = "modSortingComboBox";
-            this.modSortingComboBox.Size = new System.Drawing.Size(125, 21);
-            this.modSortingComboBox.TabIndex = 12;
-            // 
-            // modSortingLabel
-            // 
-            this.modSortingLabel.AutoSize = true;
-            this.modSortingLabel.Location = new System.Drawing.Point(137, 38);
-            this.modSortingLabel.Name = "modSortingLabel";
-            this.modSortingLabel.Size = new System.Drawing.Size(67, 13);
-            this.modSortingLabel.TabIndex = 11;
-            this.modSortingLabel.Text = "Mod Sorting:";
-            // 
-            // modNameLabel
-            // 
-            this.modNameLabel.AutoSize = true;
-            this.modNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.25F);
-            this.modNameLabel.Location = new System.Drawing.Point(5, 5);
-            this.modNameLabel.Name = "modNameLabel";
-            this.modNameLabel.Size = new System.Drawing.Size(179, 26);
-            this.modNameLabel.TabIndex = 10;
-            this.modNameLabel.Text = "No Mod Selected";
-            // 
-            // globalServerDataLocationLabel
-            // 
-            this.globalServerDataLocationLabel.AutoSize = true;
-            this.globalServerDataLocationLabel.Location = new System.Drawing.Point(13, 90);
-            this.globalServerDataLocationLabel.Name = "globalServerDataLocationLabel";
-            this.globalServerDataLocationLabel.Size = new System.Drawing.Size(144, 13);
-            this.globalServerDataLocationLabel.TabIndex = 8;
-            this.globalServerDataLocationLabel.Text = "Global Server Data Location:";
             // 
             // MainForm
             // 
@@ -746,12 +773,14 @@
         private System.Windows.Forms.Button updateModButton;
         private System.Windows.Forms.Button increadeModIndexButton;
         private System.Windows.Forms.Button decreaseModIndexButton;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox modIndexTextBox;
         private System.Windows.Forms.Label modIndexLabel;
         private System.Windows.Forms.ComboBox modSortingComboBox;
         private System.Windows.Forms.Label modSortingLabel;
         private System.Windows.Forms.Label modNameLabel;
         private System.Windows.Forms.Label globalServerDataLocationLabel;
+        private System.Windows.Forms.Button addModButton;
+        private System.Windows.Forms.Button deleteModButton;
     }
 }
 
